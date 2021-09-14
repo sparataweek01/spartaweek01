@@ -12,7 +12,7 @@
         }
 
         body {
-            background-color: #ffdf0e;
+            background-color: #ffe126;
         }
 
         #banner {
@@ -29,11 +29,13 @@
             display: flex;
             font-size: 25px;
         }
+
         #nav-left {
             width: 200px;
             margin-right: 100px;
             padding: 20px;
         }
+
         #nav-right {
             width: 1000px;
             text-align: right;
@@ -54,11 +56,12 @@
         }
 
         #search-box {
-        width: 70%;
-        margin: 0px auto;
-        max-width: 700px;
+            width: 70%;
+            margin: 0px auto;
+            max-width: 700px;
             display: flex;
-    }
+        }
+
         #search-input {
             width: 80%;
             height: 60px;
@@ -73,6 +76,61 @@
             border-radius: 10px;
             background-color: #100e00;
             color: white;
+        }
+
+        #card-wrapper {
+            display: flex;
+            width: 70%;
+            margin: 0 auto;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        #card-component {
+            width: 300px;
+            height: 300px;
+            text-align: center;
+            margin-right: 10px;
+            margin-bottom: 30px;
+        }
+
+        .card-1 {
+            border-radius: 20px;
+            padding: 5px;
+            box-sizing: border-box;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            color: black;
+            font-weight: 600;
+            font-size: 15px;
+            background: #F8F8F8;
+        }
+
+        .curation-title {
+            margin-top: 100px;
+            margin-left: 210px;
+        }
+        .card-1 > img {
+            width: 100%;
+            border-radius: 20px 20px 5px 5px;
+        }
+
+        .card-title {
+            margin-top: 20px;
+            color: black;
+            font-size: 20px;
+        }
+
+        .card-body > p {
+
+            font-size: 18px;
+        }
+
+        .card-text > span {
+            color: gray;
+            font-size: 14px;
+            font-weight: 10;
         }
 
 
@@ -92,11 +150,118 @@
     </div>
     <div id="search-box">
         <input id="search-input" type="text">
-        <button id="search-btn"> 검색 </button>
+        <button id="search-btn"> 검색</button>
     </div>
-    <div id="cards-wrapper">
-        <div id="card-box">
+            <h1 class="curation-title">맛집 추천 리스트</h1>
+    <div id="card-wrapper">
 
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
+        </div>
+        <div id="card-component">
+            <div class="card-1">
+                <img class="card-img-top"
+                     src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                     alt="Card image cap">
+                <div class="card-body">
+                    <a target="_blank" href="#" class="card-title">음식점 타이틀</a>
+                    <p class="card-text"> 음식점 설명 <span>카테고리</span></p>
+                    <p class="card-text comment">음식점 주소</p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
