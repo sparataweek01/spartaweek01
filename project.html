@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+    <title>레시피 상세페이지</title>
+    <style>
+        * {
+            font-family: 'Do Hyeon', sans-serif;
+        }
+
+        body {
+            background-color: #ffe126;
+        }
+        .name , .text {
+            display: inline;
+            position: absolute;
+        }
+        .name {
+            top: 10px;
+            right: 20px;
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+        .text {
+            top: 20px;
+            left: 20px;
+            font-size: 15px;
+            font-weight: bold;
+            color: rgba(100, 100, 100, 0.5);
+        }
+
+        #search-box {
+            width: 550px;
+            margin: 80px auto 0 auto;
+            max-width: 700px;
+            display: block;
+        }
+
+        #search-input {
+            width: 450px;
+            border-width: 4px;
+            border-color: black;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        #search-btn {
+            height: 40px;
+            width: 60px;
+            border-radius: 9px;
+            border-color: black;
+            color: white;
+        }
+
+        .recispe {
+            width: 420px;
+            margin: 50px auto 0 auto;
+        }
+
+        .adcard {
+            margin: auto;
+            height: 200px;
+            width: 100;
+            background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMjFfMTk4%2FMDAxNTcxNjA5Mzc3NjUy.1wO6YRNek3RPugUAMDRfXIA6tUpS7tUhECh7K-xpHNQg.b2V2xRk0dNpVRl73O4GU8YOlx4nAL8Y3wj-DUflFUSkg.JPEG.chkh26%2FKakaoTalk_20191021_053445957_03.jpg&type=sc960_832");
+            background-size: 110%;
+            background-position: center;
+        }
+
+        card-body {
+            margin: 20px;
+        }
+
+        .card, form-control, .recispe, .rbtn, .inputRe,.card-body , #search-input {
+            border-radius: 15px;
+        }
+
+        .line {
+            width: 420px;
+            height: 400px;
+            margin: 50px auto 0 auto;
+        }
+
+        .inputRe {
+            border: solid 1px white;
+            margin: 15px auto 0 auto;
+            background-color: white;
+            width: 500px;
+            height: 300px;
+        }
+
+        .rbtn {
+            display: block;
+            width: 200px;
+            margin: 0 auto;
+            font-size: 20px;
+        }
+
+        .rbtn, #search-btn {
+            background-color: black;
+            border-color: black;
+            color: white;
+        }
+
+        .cardS {
+            margin: 50px auto;
+            width: 800px;
+        }
+        .card img{
+            width:240px;
+            margin-top:9px;
+            margin-left: 6px;
+        }
+        a {
+            color:black;
+        }
+    </style>
+    <!--  스크립트 삽입  -->
+    <script>
+        function respBt(){
+            $("#RespModal").modal("show");
+        }
+        function close(){
+            $("#RespModal").modal("hide");
+        }
+    </script>
+</head>
+
+<body>
+<h5 class="name">돼생</h5>
+<h6 class="text">.오늘먹을 음식을 내일로 미루지마라_Piggy life.</h6>
+<!--음식 검색란-->
+<div id="search-box">
+    <input id="search-input" type="text" placeholder="무엇을 먹을까요?">
+    <button id="search-btn"> 검색</button>
+</div>
+<!--광고란-->
+<div class="recispe">
+    <div class="card adcard">
+        <div class="card-body">
+            <h2 class="card-title" style="color: white"> 오늘의 레시피 </h2>
+            <h5><p class="card-text" style="color: white"> 레시피 공유하고 1,000원 받자! </p></h5>
+        </div>
+    </div>
+</div>
+<!--레시피 올리는 부분-->
+<div class="inputRe">
+    <div class="line">
+        <div class="mb-3">
+            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="레시피명을 입력해주세요.">
+        </div>
+        <div class="mb-3 mb-m">
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                  placeholder="레시피에 관한 간단한 총평을 적어주세요."></textarea>
+        </div>
+        <button type="button" class="btn btn-primary rbtn" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="respBt()" >
+            레시피 공유하기
+        </button>
+    </div>
+</div>
+<!--레시피 모달-->
+<div class="modal" tabindex="-1" role="dialog" id="RespModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">개인 블로그에 작성된 레시피를 URL을 통해 공유해주세요!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>여기에 url 첨부와 사진을 넣을 예정입니다.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">레시피 공유!</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  카드  -->
+<div class="row row-cols-1 row-cols-md-3 g-4 cardS">
+    <div class="card-columns">
+        <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+    <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+        <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+        <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+        <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+        <div class="card" onclick="cardModal()">
+           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>
+    </div>
+</div>
+<!-- Large modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="#cardMod">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <p>여기에 블로그 내용이 들어갈예정</p>
+        <p>url 정보 스크래핑 후</p>
+         <p>show로 띄워</p>
+         <p>연결시킬까 합니다.</p>
+         <p>오늘안에 하겠습니다.</p>
+         <p>열</p>
+         <p>공</p>
+
+    </div>
+  </div>
+</div>
+</div>
+</body>
+
+</html>
