@@ -31,10 +31,12 @@
         body {
             background-color: #ffe126;
         }
-        .name , .text {
+
+        .name, .text {
             display: inline;
             position: absolute;
         }
+
         .name {
             top: 10px;
             right: 20px;
@@ -91,28 +93,26 @@
             margin: 20px;
         }
 
-        .card, form-control, .recispe, .rbtn, .inputRe,.card-body , #search-input {
+        .card, form-control, .recispe, .rbtn, .inputRe, .card-body, #search-input {
             border-radius: 15px;
-        }
-
-        .line {
-            width: 420px;
-            height: 400px;
-            margin: 50px auto 0 auto;
         }
 
         .inputRe {
             border: solid 1px white;
-            margin: 15px auto 0 auto;
+            margin: 15px auto 50px auto;
             background-color: white;
+            text-align: center;
+            font-size: 19px;
+            font-weight: bold;
+            padding-top: 34px;
             width: 500px;
-            height: 300px;
+            height: 200px;
         }
 
         .rbtn {
             display: block;
             width: 200px;
-            margin: 0 auto;
+            margin: 20px auto 0 auto;
             font-size: 20px;
         }
 
@@ -122,32 +122,74 @@
             color: white;
         }
 
-        .cardS {
+        .card-columns {
             margin: 50px auto;
             width: 800px;
         }
-        .card img{
-            width:240px;
-            margin-top:9px;
+
+        .cardS {
+            background-color: rgba(255, 255, 198, 0.7);
+            width: 100%
+        }
+
+        .card img {
+            width: 240px;
+            margin-top: 9px;
             margin-left: 6px;
         }
+
         a {
-            color:black;
+            color: black;
+        }
+
+        .respTurn {
+            height: 350px;
+        }
+
+        .explain {
+            margin-top: 20px;
+        }
+
+        .User {
+            display: block;
+            font-size: 40px;
+            text-align: center;
+            height: 30px;
+            padding: 30px;
         }
     </style>
     <!--  스크립트 삽입  -->
     <script>
-        function respBt(){
+        function respBt() {
             $("#RespModal").modal("show");
         }
-        function close(){
-            $("#RespModal").modal("hide");
+
+        function cancel() {
+            alert("레시피 공유를 취소하시겠습니까?")
         }
+
+        function share() {
+            let card = `<div class="card">
+            <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+                <img class="card-img-top"
+                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                <div class="card-body">
+                    <h5 class="card-title">토마토 파스타 레시피</h5>
+                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                </div>
+            </a></div>`;
+            let append = $(".card-columns").append(card);
+            if (append) {
+                $("#exampleModalLong").modal("hide")
+            }
+        }
+
     </script>
 </head>
 
 <body>
-<h5 class="name">돼생</h5>
+<p class="name">🐷돼생</p>
 <h6 class="text">.오늘먹을 음식을 내일로 미루지마라_Piggy life.</h6>
 <!--음식 검색란-->
 <div id="search-box">
@@ -165,119 +207,180 @@
 </div>
 <!--레시피 올리는 부분-->
 <div class="inputRe">
-    <div class="line">
-        <div class="mb-3">
-            <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="레시피명을 입력해주세요.">
-        </div>
-        <div class="mb-3 mb-m">
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
-                  placeholder="레시피에 관한 간단한 총평을 적어주세요."></textarea>
-        </div>
-        <button type="button" class="btn btn-primary rbtn" data-toggle="button" aria-pressed="false" autocomplete="off" onclick="respBt()" >
-            레시피 공유하기
-        </button>
-    </div>
+    <p>내가 만들었지만 너무 맛있는 레시피!</p>
+    <p> 지금 공유하러 갈까요?</p>
+    <button type="button" class="btn btn-primary rbtn" data-toggle="modal" data-target="#exampleModalLong"
+            aria-pressed="false" autocomplete="off" onclick="respBt()">
+        레시피 공유하기
+    </button>
+</div>
 </div>
 <!--레시피 모달-->
-<div class="modal" tabindex="-1" role="dialog" id="RespModal">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document" id="#M">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">개인 블로그에 작성된 레시피를 URL을 통해 공유해주세요!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" >
+                <h5 class="modal-title" id="exampleModalLongTitle">레시피를 공유해주세요!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>여기에 url 첨부와 사진을 넣을 예정입니다.</p>
+                <form>
+                    <div class="form-group">
+                        <label for="exampleFormControlInput1">어떤음식을 만드셨나요?</label>
+                        <input type="email" class="form-control" id="exampleFormControlInput1"
+                               placeholder="레시피명을 적어주세요.">
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">완성된 음식 사진을 선택해주세요.</label>
+                    </div>
+                    <div class="explain">
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">레시피에 들어가는 재료는 뭔가요?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
+                                      placeholder="레시피 재료와 양을 적어주세요."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleFormControlTextarea1">레시피를 자세히 적어볼까요?</label>
+                            <textarea class="form-control respTurn" id="exampleFormControlTextarea1" rows="3"
+                                      placeholder="레시피 순서를 자세히 적어주세요."></textarea>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?">
+                            </div>
+                        </div>
+                        <fieldset class="form-group">
+                            <div class="row">
+                                <legend class="col-form-label col-sm-2 pt-0">레시피 난이도</legend>
+                                <div class="col-sm-10">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1"
+                                               value="option1" checked>
+                                        <label class="form-check-label" for="gridRadios1">
+                                            쉬워요
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                               value="option2">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            할만해요
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                               value="option2">
+                                        <label class="form-check-label" for="gridRadios2">
+                                            어려워요
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary">레시피 공유!</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
+                <button type="button" class="btn btn-primary" onclick="share();closeMo();" name="shareBt">레시피 공유!
+                </button>
             </div>
         </div>
     </div>
 </div>
 
 <!--  카드  -->
-<div class="row row-cols-1 row-cols-md-3 g-4 cardS">
-    <div class="card-columns">
-        <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+<div class="cardS" id="#a">
+    <div class="User">돼생 유저들의 레시피!지금 바로 볼까요?</div>
+    <div class="row row-cols-1 row-cols-md-3 g-4 ">
+        <div class="card-columns">
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
-    <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
-        <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
-        <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
-        <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
-        <div class="card" onclick="cardModal()">
-           <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+            <div class="card">
+                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">토마토 파스타 레시피</h5>
-                    <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                </div>
-            </a></div>
+                    <img class="card-img-top"
+                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+                    <div class="card-body">
+                        <h5 class="card-title">토마토 파스타 레시피</h5>
+                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+                    </div>
+                </a></div>
+        </div>
     </div>
 </div>
-<!-- Large modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="#cardMod">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <p>여기에 블로그 내용이 들어갈예정</p>
-        <p>url 정보 스크래핑 후</p>
-         <p>show로 띄워</p>
-         <p>연결시킬까 합니다.</p>
-         <p>오늘안에 하겠습니다.</p>
-         <p>열</p>
-         <p>공</p>
+<!-- card modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+     aria-hidden="true" id="#cardMod">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <p>여기에 블로그 내용이 들어갈예정</p>
+            <p>url 정보 스크래핑 후</p>
+            <p>show로 띄워</p>
+            <p>연결시킬까 합니다.</p>
+            <p>오늘안에 하겠습니다.</p>
+            <p>열</p>
+            <p>공</p>
 
+        </div>
     </div>
-  </div>
 </div>
 </div>
 </body>
