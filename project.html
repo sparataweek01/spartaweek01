@@ -185,6 +185,13 @@
             }
         }
 
+        //   카드 모달창 띄우기 함수
+        function upmo(){
+            let T1=$("#1").val();
+            alert(T1);
+        }
+
+
     </script>
 </head>
 
@@ -229,7 +236,7 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleFormControlInput1">어떤음식을 만드셨나요?</label>
+                        <label for="exampleFormControlInput1" id="#1">어떤음식을 만드셨나요?</label>
                         <input type="email" class="form-control" id="exampleFormControlInput1"
                                placeholder="레시피명을 적어주세요.">
                     </div>
@@ -239,12 +246,12 @@
                     </div>
                     <div class="explain">
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">레시피에 들어가는 재료는 뭔가요?</label>
+                            <label for="exampleFormControlTextarea1" id="#2">레시피에 들어가는 재료는 뭔가요?</label>
                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
                                       placeholder="레시피 재료와 양을 적어주세요."></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="exampleFormControlTextarea1">레시피를 자세히 적어볼까요?</label>
+                            <label for="exampleFormControlTextarea1" id="#3">레시피를 자세히 적어볼까요?</label>
                             <textarea class="form-control respTurn" id="exampleFormControlTextarea1" rows="3"
                                       placeholder="레시피 순서를 자세히 적어주세요."></textarea>
                         </div>
@@ -252,10 +259,10 @@
                     <form>
                         <div class="form-row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?">
+                                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?" id="#4">
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?">
+                                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?" id="#5">
                             </div>
                         </div>
                         <fieldset class="form-group">
@@ -303,7 +310,7 @@
     <div class="User">돼생 유저들의 레시피!지금 바로 볼까요?</div>
     <div class="row row-cols-1 row-cols-md-3 g-4 ">
         <div class="card-columns">
-            <div class="card">
+            <div class="card" onclick="upmo()">
                 <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
                     <img class="card-img-top"
@@ -313,7 +320,7 @@
                         <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
                     </div>
                 </a></div>
-            <div class="card">
+            <div class="card" onclick="upmo()">
                 <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
                     <img class="card-img-top"
@@ -323,7 +330,7 @@
                         <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
                     </div>
                 </a></div>
-            <div class="card">
+            <div class="card" onclick="upmo()">
                 <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
                     <img class="card-img-top"
@@ -333,7 +340,7 @@
                         <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
                     </div>
                 </a></div>
-            <div class="card">
+            <div class="card" onclick="upmo()">
                 <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
                     <img class="card-img-top"
@@ -371,13 +378,12 @@
      aria-hidden="true" id="#cardMod">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <p>여기에 블로그 내용이 들어갈예정</p>
-            <p>url 정보 스크래핑 후</p>
-            <p>show로 띄워</p>
-            <p>연결시킬까 합니다.</p>
-            <p>오늘안에 하겠습니다.</p>
-            <p>열</p>
-            <p>공</p>
+            <h1 id="#rptitle">레시피 제목</h1>
+            <p id="#ingre">레시피 재료</p>
+            <p id="#how">레시피 순서</p>
+            <h6 id="#time">요리시간</h6>
+            <h6 id="#money">재료비용</h6>
+            <h6 id="#level">레시피 난이도</h6>
 
         </div>
     </div>
