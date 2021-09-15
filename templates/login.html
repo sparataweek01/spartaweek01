@@ -30,8 +30,17 @@
         }
 
         body {
-            background-color: RGBA(232, 52, 78, 0.2);
+            background-color: #ffe126;
             min-height: 100vh;
+        }
+
+        #banner {
+            width: 800px;
+            height: 300px;
+            margin: 50px auto;
+            margin-bottom: 10px;
+            text-align: center;
+            color: white;
         }
 
         #banner-icon {
@@ -40,11 +49,13 @@
             font-size: 50px;
             font-weight: 300;
             line-height: 3px;
+            margin-bottom: 30px;
         }
 
         #banner-title {
             font-size: 50px;
             font-weight: 300;
+            color: black;
         }
 
         .section {
@@ -66,19 +77,19 @@
         }
 
         .is-sparta {
-            color: #e8344e !important;
+            color: #ffe126;
         }
 
         .button.is-sparta {
-            background-color: #e8344e;
+            background-color: #ffe126;
             border-color: transparent;
-            color: #fff !important;
+            color: black;
         }
 
         .button.is-sparta.is-outlined {
             background-color: transparent;
-            border-color: #e8344e;
-            color: #e8344e !important;
+            border-color: black;
+            color: black;
         }
 
         .help {
@@ -91,23 +102,9 @@
 
     </style>
     <script>
-        {
-            #
-            {%
-                if msg %}
-            #
-        }
-        {
-            #            alert("{{ msg }}")
-            #
-        }
-        {
-            #
-            {%
-                endif %
-            }
-            #
-        }
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
 
 
         function sign_in() {
