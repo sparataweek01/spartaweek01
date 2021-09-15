@@ -9,7 +9,7 @@ client = MongoClient('3.34.5.163', 27017, username="test", password="test")
 db = client.dbsparta_plus_week2
 
 
-@app.route('/')
+@app.route('/내맘대로', method='POST')
 def main():
     # DB에서 저장된 단어 찾아서 HTML에 나타내기
     return render_template("home.html")
