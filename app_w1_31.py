@@ -17,11 +17,36 @@ SECRET_KEY = 'PIGGIY_LIFE'
 # jwt 디코딩 할 때의 시크릿 키
 
 
-# 메인 페이지 입장
+# 메인 페이지 회원가입 관련 페이지
 @app.route('/')
+def home():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({"username": payload["id"]})
+        return render_template('메인페이지.html', user_info=user_info)
+    except jwt.ExpiredSignatureError:
+        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+    except jwt.exceptions.DecodeError:
+        return redirect(url_for("login", msg="로그인 정보가 존재하지 않습니다."))
+
+
+# 메인 페이지 입장
+@app.route('/', methods=['GET'])
 def main():
-    result = '메인 로그인 페이지 sign_in을 통과해야 들어올 수 있어요!'
-    return result
+    #result = '메인 로그인 페이지 sign_in을 통과해야 들어올 수 있어요!'
+    #return result
+
+    # 추천 목록 띄워주기
+    likes = db.recipes.find({}, {'_id': False})('like')
+    top_ten_recipes = list(db.recipes.find({}).sort("like", -1).limit(10))
+    # 탑_텐_레시피스에 좋아요(like)를 내림차순(-1)으로 정렬한 다음 위에서 10개의 딕셔너리들만 리스트로 만든다.
+
+    return jsonify({'result': 'success', 'top_ten_Recipes': top_ten_recipes})
+
+    # 같은 방법으로 맛집도 할 수 있다.
+    # top_ten_matjipss = list(db.matjips.find({}).sort("like", -1).limit(10))
+    # return jsonify({'result': 'success', 'top_ten_matjips': top_ten_matjips})
 
 
 # 로그인 페이지
@@ -35,6 +60,7 @@ def sign_in():
     result = db.users.find_one({'username': username_receive, 'password': pw_hash})
 
     if result is not None:
+        # ㄴ result에 유저이름과 패스워드가 일치하는 것을 찾는다면!
         payload = {
             'id': username_receive,
             'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
@@ -42,29 +68,42 @@ def sign_in():
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256').decode('utf-8')
 
         return jsonify({'result': 'success', 'token': token})
-    # 찾지 못하면
     else:
         return jsonify({'result': 'fail', 'msg': '아이디/비밀번호가 일치하지 않습니다.'})
+        # ㄴ 같은 id/pw 조합을 찾지 못한다면 도출
 
 
 # 회원가입 페이지
 @app.route('/sign_up')
 def sign_up():
 
-    username_receive = request.form['username_give'] #이름이 두번 써져서 나온 줄
+    username_receive = request.form['username_give']
     password_receive = request.form['password_give']
+    location_receive = request.form['location_give'] #사는 지역
+
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    # ㄴ 패스워드를 해시함수로 변경하여 저장
 
     doc = {
         "username": username_receive,  # 아이디
-        "password": password_hash,  # 비밀번호
-        "profile_name": username_receive,  # 프로필 이름 기본값은 아이디 초기 설정 불가능 추후에 본인이 변경 할 수 있음
-        "profile_pic": "",  # 프로필 사진 파일 이름
-        "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지 #스테틱에 있어야함
-        "profile_info": ""  # 프로필 한 마디
+        "password": password_hash,  # 비밀번호_해시
+        "location": location_receive # 사는 -시
     }
+        # "profile_info": ""  # 프로필 한 마디
+        # "profile_name": username_receive,  # 프로필 이름 기본값은 아이디 초기 설정 불가능 추후에 본인이 변경 할 수 있음
+        # "profile_pic_real": "profile_pics/profile_placeholder.png",  # 프로필 사진 기본 이미지 #스테틱에 있어야함
+        # "profile_pic": "",  # 프로필 사진 파일 이름
+
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
+
+
+# 아이디 중복확인!
+@app.route('/sign_up/check_dup', methods=['POST'])
+def check_dup():
+    username_receive = request.form['username_give']
+    exists = bool(db.users.find_one({"username": username_receive}))
+    return jsonify({'result': 'success', 'exists': exists})
 
 
 # 전체 맛집 리스트 출력
@@ -169,30 +208,31 @@ def my_recipe_save():
     title_receive = request.form['title_give']
     subtitle_receive = request.form['subtitle_give']
     detail_receive = request.form['detail_give']
-    category_receive = request.form['category_give']
+    # category_receive = request.form['category_give']
     img_receive = request.form['img_give'] # 사진에 대한 코드는 수정 필요
-    smtg1_receive = request.form['mtg1_give']
-    smtg2_receive = request.form['smtg2_give']
+    ingredients_receive = request.form['ingredients_give']
+
+    posting_time = datetime.now() # 새로고침을 해야 갱신된다. >> reload 가 필요함
 
     doc = {
         'title': title_receive,
         'subtitle': subtitle_receive,
         'detail': detail_receive,
-        'category': category_receive,
         'img': img_receive,
-        'smtg1': smtg1_receive,
-        'smtg2': smtg2_receive
+        'ingredients': ingredients_receive,
+        'posting_time': posting_time
     }
+        # 'category': category_receive,
+
     db.recipes.insert_one(doc)
+    return jsonify({'result': 'success', 'msg': '레시피 등록 완료!'})
 
-    return jsonify({'msg': '레시피 등록 완료!'})
 
-
-# 레시피 검색
+#레시피 검색
 @app.route('/api/searching_recipe', methods=['GET'])
 def searching_recipe():
-    # 검색을 어떻게 할 것 인지 가게명, 내용 한번에?
-    # 아니면 복수 조건으로?
+    # 모든 데이터 베이스 항목에서 검색
+    # 필터 : 1. 작성 시간 // 2. user id
 
     word_receive = request.form['word_give']
     result_list = list(db.recipes.find({'$**': word_receive}, {'_id': False}))
@@ -202,6 +242,7 @@ def searching_recipe():
     return render_template('')
 
 
+# 어려움
 # 좋아요 업데이트
 @app.route('/api/update_like', methods=['POST'])
 def update_like():
@@ -230,7 +271,7 @@ def update_like():
         return redirect(url_for("home"))
 
 
-
+# 어려움
 # 사진 저장
 @app.route('/api/save_img', methods=['POST'])
 def save_img():
