@@ -89,21 +89,17 @@ def check_dup():
 
 
 # 검색창
-@app.route('/home', methods=['GET'])
+@app.route('/home')
 def receipe():
-    result1 = list(db.recipes.find({'title': {"$regex": "종원"}}))
-    result2 = list(db.recipes.find({'title2': {"$regex": "종원"}}))
-    result3 = list(db.recipes.find({'title3': {"$regex": "종원"}}))
-    posts = result1 + result2 + result3
-    return render_template('home.html', posts=posts)
+    return render_template('home.html')
 
 
 #  검색로직
 @app.route('/home/posts',  methods=['GET'])
-def search():
-    result1 = list(db.recipes.find({'title': {"$regex": "종원"}}))
-    result2 = list(db.recipes.find({'title2': {"$regex": "종원"}}))
-    result3 = list(db.recipes.find({'title3': {"$regex": "종원"}}))
+def search(keword):
+    result1 = list(db.recipes.find({'title': {"$regex": keword}}))
+    result2 = list(db.recipes.find({'title2': {"$regex": keword}}))
+    result3 = list(db.recipes.find({'title3': {"$regex": keword}}))
     print(len(result1))
     print(len(result2))
     print(len(result3))
@@ -113,7 +109,8 @@ def search():
     for finalpost in finalposts:
         print(finalpost)
     print(len(finalposts))
-    return "완료"
+    return render_template('home.html', posts=finalposts)
+    # return jsonify({'result': 'success', 'posts': finalposts})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
