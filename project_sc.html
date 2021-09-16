@@ -93,7 +93,7 @@
             margin: 20px;
         }
 
-        .card, form-control, .recispe, .rbtn, .inputRe, .card-body, #search-input {
+        .card, form-control, .recispe, .rbtn, .inputRe, .card-body, #search-input, .in , .ho {
             border-radius: 15px;
         }
 
@@ -163,6 +163,40 @@
             border-radius:.25rem;
             text-align: center;
         }
+        
+        
+    .in {
+      border: solid 3px black;
+      width: 80%;
+      height: auto;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .ho {
+      border: solid 3px black;
+      width: 80%;
+      height: auto;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .modal-content {
+      text-align: center;
+    }
+
+    .infocenter {
+      margin: auto;
+      width: 100%;
+    }
+
+    .line1, .line2 {
+      margin-bottom: 4px;
+    }
+
+    .movline1, .movline2 {
+      margin-top: 20px;
+    }
     </style>
     <!--  스크립트 삽입  -->
     <script>
@@ -569,21 +603,44 @@
         </div>
     </div>
 </div>
+
+
 <!-- card modal -->
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true" id="#cardMod">
-    <div class="modal-dialog modal-lg" id="specific_recipe_modal">
-        <div class="modal-content">
-            <h1 id="#rptitle">레시피 제목</h1>
-            <p id="#ingre">레시피 재료</p>
-            <p id="#how">레시피 순서</p>
-            <h6 id="#time">요리시간</h6>
-            <h6 id="#money">재료비용</h6>
-            <h6 id="#level">레시피 난이도</h6>
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <h1 id="#rptitle">🥩레시피 타이틀🥩</h1>
+      <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "gkdtlr"이에요!> </span> <!--  한식 양식 중식 일식 기타 선택 텍스트   -->
+      <img src="" class="photo"> <!-- 완성된 사진  -->
+      <div class="infocenter">
+        <div class="movline1">
+          <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+          <div class="in">
+            <!-- 래시피 재료             -->
+            height는 알아서 늘었다 줄었다 합니당.
+          </div>
         </div>
+        <div class="movline2">
+          <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+          <div class="ho">
+            ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
+            <!--   레시피 설명          -->
+          </div>
+        </div>
+      </div>
+      <h6 id="#time"><br>⏰ 시간 :</h6>
+      <h6 id="#money"><br>💰 비용 :</h6>
+      <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;"> <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
+      <h6 style="margin-top: 20px;">📌 이런분께 추천해요!
+        <br><!--   해쉬태그 input값 띄워주세요!  --></h6>
+
+
     </div>
+  </div>
 </div>
 </div>
+
 </body>
 
 </html>
