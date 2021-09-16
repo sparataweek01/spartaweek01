@@ -28,13 +28,23 @@ for recipe in recipes:
     view = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_buyer').text
     img = recipe.select_one('div.common_sp_thumb > a > img')['src']
     user = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv_name > a').text
-
-    doc = {
-        'title': title,
-        'view': view,
-        'img-url': img,
-        'user': user
-    }
+    if recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_rv_ea') is not None:
+        doc = {
+                    'title': title,
+                    'view': view,
+                    'img-url': img,
+                    'user': user,
+                    'review': recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_rv_ea').text
+                }
+        print(doc['review'])
+    else:
+        doc = {
+            'title': title,
+            'view': view,
+            'img-url': img,
+            'user': user,
+            'review': "(0)"
+        }
+        print(doc['review'])
 
     db.recipes.insert_one(doc)
-
