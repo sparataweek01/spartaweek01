@@ -157,6 +157,12 @@
             height: 30px;
             padding: 30px;
         }
+        #tag {
+            width:250px;
+            border: 1px solid #ced4da;
+            border-radius:.25rem;
+            text-align: center;
+        }
     </style>
     <!--  스크립트 삽입  -->
     <script>
@@ -271,6 +277,69 @@
                 }
             })
         }
+ //  해시태그
+    $(document).ready(function () {
+        let tag = {};
+        let counter = 0;
+
+        // 입력한 값을 태그로 생성한다.
+        function addTag (value) {
+            tag[counter] = value;
+            counter++; // del-btn 의 고유 id 가 된다.
+        }
+
+        // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+        function marginTag () {
+            return Object.values(tag).filter(function (word) {
+                return word !== "";
+            });
+        }
+
+        // 서버에 제공
+        $("#tag-form").on("submit", function (e) {
+            let value = marginTag(); // return array
+            $("#rdTag").val(value);
+
+            $(this).submit();
+        });
+
+        $("#tag").on("keypress", function (e) {
+            let self = $(this);
+
+            //엔터나 스페이스바 눌렀을때 실행
+            if (e.key === "Enter" || e.keyCode == 32) {
+
+                let tagValue = self.val(); // 값 가져오기
+
+                // 해시태그 값 없으면 실행X
+                if (tagValue !== "") {
+
+                    // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                    let result = Object.values(tag).filter(function (word) {
+                        return word === tagValue;
+                    })
+
+                    // 해시태그가 중복되었는지 확인
+                    if (result.length == 0) {
+                        $("#tag-list").append("<li class='tag-item'>"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+                        addTag(tagValue);
+                        self.val("");
+                    } else {
+                        alert("태그값이 중복됩니다.");
+                    }
+                }
+                e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+            }
+        });
+
+        // 삭제 버튼
+        // 인덱스 검사 후 삭제
+        $(document).on("click", ".del-btn", function (e) {
+            let index = $(this).attr("idx");
+            tag[index] = "";
+            $(this).parent().remove();
+        });
+})
 
 
         //   카드 모달창 띄우기 함수
@@ -381,7 +450,37 @@
                             </div>
                         </fieldset>
                     </form>
+
+
                 </form>
+            <div class="form-group">
+                        <label for="exampleFormControlTextarea1" id="#6">레시피 총평을 적어주세요.</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea3" rows="3"></textarea>
+                    </div>
+                    <div class="category">
+                        <label for="exampleFormControlSelect1">음식의 카테고리를 선택해주세요!</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>한식</option>
+                            <option>중식</option>
+                            <option>양식</option>
+                            <option>일식</option>
+                            <option>기타</option>
+                        </select>
+                    </div>
+                </form>
+                 <div class="tr_hashTag_area">
+
+           <div class="form-group">
+                <input type="hidden" value="" name="tag" id="rdTag" />
+            </div>
+
+             <ul id="tag-list"></ul>
+
+            <div class="form-group">
+            	<input type="text" id="tag" size="7" placeholder="엔터로 해시태그를 등록해주세요." >
+           </div>
+</div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
@@ -391,6 +490,7 @@
         </div>
     </div>
 </div>
+
 
 <!--  카드  -->
 <div class="cardS" id="#a">
