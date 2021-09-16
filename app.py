@@ -95,22 +95,19 @@ def receipe():
 
 
 #  검색로직
-@app.route('/home/posts',  methods=['GET'])
-def search(keword):
-    result1 = list(db.recipes.find({'title': {"$regex": keword}}))
-    result2 = list(db.recipes.find({'title2': {"$regex": keword}}))
-    result3 = list(db.recipes.find({'title3': {"$regex": keword}}))
-    print(len(result1))
-    print(len(result2))
-    print(len(result3))
+@app.route('/home/posts',  methods=['POST'])
+def search():
+    keyword = request.form['keyword_give']
+    result1 = list(db.recipes.find({'title': {"$regex": keyword}}))
+    result2 = list(db.recipes.find({'title2': {"$regex": keyword}}))
+    result3 = list(db.recipes.find({'title3': {"$regex": keyword}}))
     posts = result1 + result2 + result3
-    print(len(posts))
-    finalposts = list({post['_id']: post for post in posts}.values())
-    for finalpost in finalposts:
-        print(finalpost)
-    print(len(finalposts))
-    return render_template('home.html', posts=finalposts)
-    # return jsonify({'result': 'success', 'posts': finalposts})
+    tempposts = list({post['_id']: post for post in posts}.values())
+    finalposts = []
+    for temppost in tempposts:
+        temppost['_id'] = ""
+        finalposts.append(temppost)
+    return jsonify({'result': 'success', 'posts': finalposts})
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
