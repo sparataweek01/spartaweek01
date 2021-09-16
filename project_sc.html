@@ -189,8 +189,11 @@
             let 간단설명 = $('#간단설명_인풋박스').val()
 
             let recipe_easy = $('input:checkbox[ID="recipe_easy"]').is(":checked")
+            console.log(recipe_easy)
             let recipe_soso = $('input:checkbox[ID="recipe_soso"]').is(":checked")
+            console.log(recipe_soso)
             let recipe_hard = $('input:checkbox[ID="recipe_hard"]').is(":checked")
+            console.log(recipe_hard)
 
             let recipe_level = ""
             if (recipe_easy === true && recipe_soso === false && recipe_hard === false) {
@@ -484,7 +487,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
-                <button type="button" class="btn btn-primary" onclick="share();closeMo();" name="shareBt">레시피 공유!
+                <button type="button" class="btn btn-primary" onclick="share();" name="shareBt">레시피 공유!
                 </button>
             </div>
         </div>
