@@ -89,17 +89,31 @@ def check_dup():
 
 
 # 검색창
-@app.route('/home/<keyword>')
-def detail(keyword):
-    status_receive = request.args.get("status_give", "new")
-    # url로 받는 parameter니까 args.get
-    r = requests.get(f"https://owlbot.info/api/v4/dictionary/{keyword}", headers={"Authorization": "Token d48249c2ea738e8467a58758336670a1410c9c41"})
-    print(r)
-    if r.status_code != 200:
-        return redirect(url_for("main", msg="단어가 이상해요"))
-    result = r.json()
-    print(result)
-    return render_template("detail.html", word=keyword, result=result, status=status_receive)
+@app.route('/home', methods=['GET'])
+def receipe():
+    result1 = list(db.recipes.find({'title': {"$regex": "종원"}}))
+    result2 = list(db.recipes.find({'title2': {"$regex": "종원"}}))
+    result3 = list(db.recipes.find({'title3': {"$regex": "종원"}}))
+    posts = result1 + result2 + result3
+    return render_template('home.html', posts=posts)
+
+
+#  검색로직
+@app.route('/home/posts',  methods=['GET'])
+def search():
+    result1 = list(db.recipes.find({'title': {"$regex": "종원"}}))
+    result2 = list(db.recipes.find({'title2': {"$regex": "종원"}}))
+    result3 = list(db.recipes.find({'title3': {"$regex": "종원"}}))
+    print(len(result1))
+    print(len(result2))
+    print(len(result3))
+    posts = result1 + result2 + result3
+    print(len(posts))
+    finalposts = list({post['_id']: post for post in posts}.values())
+    for finalpost in finalposts:
+        print(finalpost)
+    print(len(finalposts))
+    return "완료"
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

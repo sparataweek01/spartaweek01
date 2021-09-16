@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+          rel="stylesheet"/>
+
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <title>Title</title>
+
+    <style>
+        button {
+            width: 100px;
+            margin: 0 auto;
+        }
+    </style>
+    <script>
+        function getPosts() {
+            $.ajax({
+                type: "GET",
+                url: "/home/posts",
+                data: {},
+                success: function (response) {
+                    console.log(response)
+                }
+        });
+        }
+    </script>
+</head>
+<body>
+
+<button onclick="getPosts()">검색</button>
+<h1>홈!</h1>
+</body>
+</html>

@@ -22,19 +22,24 @@ soup = BeautifulSoup(data.text, 'html.parser')
 #contents_area_full > div > ul.common_sp_list_ul.ea4 > li:nth-child(1)
 
 recipes = soup.select('#contents_area_full > div > ul.common_sp_list_ul.ea4 > li')
+results = list(db.recipes.find({'title': {"$regex": "종원"}}))
 
 for recipe in recipes:
     title = recipe.select_one('div.common_sp_caption > div.common_sp_caption_tit.line2').text
     view = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_buyer').text
     img = recipe.select_one('div.common_sp_thumb > a > img')['src']
     user = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv_name > a').text
+    title2 = recipe.select_one('div.common_sp_caption > div.common_sp_caption_tit.line2').text
+    title3 = recipe.select_one('div.common_sp_caption > div.common_sp_caption_tit.line2').text
     if recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_rv_ea') is not None:
         doc = {
                     'title': title,
                     'view': view,
                     'img-url': img,
                     'user': user,
-                    'review': recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_rv_ea').text
+                    'review': recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_rv_ea').text,
+                    'title2': title2,
+                    'title3' : title3
                 }
         print(doc['review'])
     else:
@@ -43,7 +48,9 @@ for recipe in recipes:
             'view': view,
             'img-url': img,
             'user': user,
-            'review': "(0)"
+            'review': "(0)",
+            'title2': title2,
+            'title3': title3
         }
         print(doc['review'])
 
