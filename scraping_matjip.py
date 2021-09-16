@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import requests
 
 client = MongoClient('3.34.5.163', 27017, username="test", password="test")
-db = client.spartaweek01_test
+db = client.dbsparta_plus_week4
 
 driver = webdriver.Chrome('./chromedriver')
 
@@ -15,7 +15,7 @@ url = "http://matstar.sbs.co.kr/location.html"
 driver.get(url)
 time.sleep(2)
 
-for i in range(1):
+for i in range(5):
     try:
         btn_more = driver.find_element_by_css_selector('#foodstar-front-location-curation-more-self > div > button')
         btn_more.click()
@@ -37,6 +37,7 @@ for place in places:
     category = place.select_one("div.box_module_cont > div > div > div.mil_inner_kind > span.il_text").text
     show, episode = place.select_one("div.box_module_cont > div > div > div.mil_inner_tv > span.il_text").text.rsplit(
         " ", 1)
+    img = place.select_one('div.box_module_image_w > img')['src']
 
     headers = {
         "X-NCP-APIGW-API-KEY-ID": "cegbwlugpl",
@@ -51,12 +52,13 @@ for place in places:
             x = float(response["addresses"][0]["x"])
             # float("127.4") -> 127.4 문자열 -> 숫자로 바꿔줌
             y = float(response["addresses"][0]["y"])
-            print(title, address, category, show, episode, x, y)
+            print(title, address, category, show, episode, x, y, img)
 
             doc = {
                 "title": title,
                 "address": address,
                 "category": category,
+                'img-url': img,
                 "show": show,
                 "episode": episode,
                 "mapx": x,

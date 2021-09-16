@@ -129,8 +129,9 @@
             box-shadow: 5px 5px 20px #999;
         }
 
-        .card-1 > img {
+        .card-img-top {
             width: 100%;
+            height: 170px;
             border-radius: 20px 20px 5px 5px;
         }
 
@@ -192,183 +193,50 @@
     </div>
     <section id="curation-box">
         <div id="cards-wrapper">
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
+            {% for matjip in matjips %}
+                <div id="card-wrapper">
+                    <div id="card-component">
+                        <div class="card-1">
+                            <img
+                                    class="card-img-top"
+                                    src="{{ matjip["img-url"]}}"
+                                    alt="Card image cap"
+                            />
+                            <div class="card-body">
+                                <a target="_blank" href="#" class="card-title"
+                                >{{ matjip.title }}</a
+                                >
+                                <p class="card-text">{{ matjip.show }} <span>{{ matjip.category }}</span></p>
+                                <p class="card-text comment">{{ matjip.address }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div id="cards-wrapper">
+            {% for recipe in recipes %}
             <div id="card-wrapper">
                 <div id="card-component">
                     <div class="card-1">
                         <img
                                 class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
+                                src="{{ recipe["img-url"] }}"
                                 alt="Card image cap"
                         />
                         <div class="card-body">
                             <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
+                            >{{ recipe.title }}</a
                             >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
+                            <p class="card-text">{{ recipe.user }} <span>{{recipe.view}}</span></p>
+                            <p class="card-text comment">{{recipe.user}}</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >음식점 타이틀</a
-                            >
-                            <p class="card-text">음식점 설명 <span>카테고리</span></p>
-                            <p class="card-text comment">음식점 주소</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
-        <!--            <div id="matjip-wrapper">-->
-        <!--                <div id="card-component">-->
-        <!--                    <div class="card-1">-->
-        <!--                        <img class="card-img-top"-->
-        <!--                             src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"-->
-        <!--                             alt="Card image cap">-->
-        <!--                        <div class="card-body">-->
-        <!--                            <a target="_blank" href="#" class="card-title">음식점 타이틀</a>-->
-        <!--                            <p class="card-text"> 음식점 설명 <span>카테고리</span></p>-->
-        <!--                            <p class="card-text comment">음식점 주소</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div id="recipies-wrapper">-->
-        <!--            <div id="recipe-wrapper">-->
-        <!--                <div id="card-component">-->
-        <!--                    <div class="card-1">-->
-        <!--                        <img class="card-img-top"-->
-        <!--                             src="https://www.eurail.com/content/dam/images/eurail/Italy%20OCP%20Promo%20Block.adaptive.767.1535627244182.jpg"-->
-        <!--                             alt="Card image cap">-->
-        <!--                        <div class="card-body">-->
-        <!--                            <a target="_blank" href="#" class="card-title">음식점 타이틀</a>-->
-        <!--                            <p class="card-text"> 음식점 설명 <span>카테고리</span></p>-->
-        <!--                            <p class="card-text comment">음식점 주소</p>-->
-        <!--                        </div>-->
-        <!--                    </div>-->
-        <!--                </div>-->
-        <!--            </div>-->
+
     </section>
 </div>
 </body>
