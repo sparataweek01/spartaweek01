@@ -219,8 +219,7 @@
             let process = $('#recipe_process').val();
             let time = $('#recipe_time').val();
             let cost = $('#recipe_cost').val();
-            let img = $('#recipe_img')[0].files[0]
-            let 간단설명 = $('#간단설명_인풋박스').val()
+            let subtitle = $('exampleFormControlTextarea3').val()
 
             let recipe_easy = $('input:checkbox[ID="recipe_easy"]').is(":checked")
             console.log(recipe_easy)
@@ -249,7 +248,7 @@
                     cost_give: cost,
                     img_give: img,
                     recipe_level_give: recipe_level,
-                    recipe_간단설명: 간단설명
+                    subtitle_give: subtitle
                 },
                 success: function (response) {
                     if (response["result"] === "success") {
@@ -521,7 +520,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
-                <button type="button" class="btn btn-primary" onclick="share(); show_cards()" name="shareBt">레시피 공유!
+                <button type="button" class="btn btn-primary" onclick="share();" name="shareBt">레시피 공유!
                 </button>
             </div>
         </div>
