@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+    <title>돼지런한 생활</title>
+    <meta property="og:title" content="돼지런한 생활"/>
+    <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
@@ -28,7 +32,7 @@
 <nav id="utility">
     <div id="nav-left">돼생</div>
     <div id="nav-right">
-    <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
     </div>
 </nav>
 <div id="main-cover">
@@ -62,7 +66,7 @@
                         <div class="card-1">
                             <img
                                     class="card-img-top"
-                                    src="{{ matjip["img-url"]}}"
+                                    src="{{ matjip["img-url"] }}"
                                     alt="Card image cap"
                             />
                             <div class="card-body">
@@ -79,24 +83,24 @@
         </div>
         <div id="cards-wrapper">
             {% for recipe in recipes %}
-            <div id="card-wrapper">
-                <div id="card-component">
-                    <div class="card-1">
-                        <img
-                                class="card-img-top"
-                                src="{{ recipe["img-url"] }}"
-                                alt="Card image cap"
-                        />
-                        <div class="card-body">
-                            <a target="_blank" href="#" class="card-title"
-                            >{{ recipe.title }}</a
-                            >
-                            <p class="card-text">{{ recipe.user }} <span>{{recipe.view}}</span></p>
-                            <p class="card-text comment">리뷰수 <b>{{recipe.review}}</b></p>
+                <div id="card-wrapper">
+                    <div id="card-component">
+                        <div class="card-1">
+                            <img
+                                    class="card-img-top"
+                                    src="{{ recipe["img-url"] }}"
+                                    alt="Card image cap"
+                            />
+                            <div class="card-body">
+                                <a target="_blank" href="#" class="card-title"
+                                >{{ recipe.title }}</a
+                                >
+                                <p class="card-text">{{ recipe.user }} <span>{{ recipe.view }}</span></p>
+                                <p class="card-text comment">리뷰수 <b>{{ recipe.review }}</b></p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
         </div>
 
