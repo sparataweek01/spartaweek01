@@ -6,7 +6,7 @@ from pymongo import MongoClient
 import requests
 
 client = MongoClient('3.34.5.163', 27017, username="test", password="test")
-db = client.week1
+db = client.dbsparta_plus_week4
 
 driver = webdriver.Chrome('./chromedriver')
 

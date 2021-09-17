@@ -10,10 +10,6 @@
     <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
     <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
 
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"
-          type="image/x-icon">
-    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
-
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
@@ -101,7 +97,7 @@
 <body>
 <div>
     <nav id="utility">
-        <div id="nav-left" onclick="window.location.href='/'" style="cursor: pointer">🐷돼생</div>
+        <div id="nav-left">돼생</div>
         <div id="nav-right">
             <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
         </div>
