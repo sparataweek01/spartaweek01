@@ -1,5 +1,5 @@
 * {
-    font-family: "Do Hyeon", sans-serif;
+    font-family: "Do Hyeon"
 }
 
 body {
@@ -18,18 +18,21 @@ body {
 #utility {
     display: flex;
     font-size: 25px;
-}
-
-#nav-left {
-    width: 200px;
-    margin-right: 100px;
     padding: 20px;
 }
 
+#nav-left {
+    width: 50%;
+    padding: 20px;
+
+}
+
+
 #nav-right {
-    width: 1000px;
+    width: 50%;
     text-align: right;
-    padding-top: 10px;
+    padding: 20px;
+
 }
 
 #sing-out-btn {
@@ -51,41 +54,42 @@ body {
 #banner-title {
     font-size: 50px;
     font-weight: 300;
+
 }
 
-#select-box {
+#search-box {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 70%;
     margin: 0 auto;
-    text-align: center;
-    color: black;
+    justify-content: center;
 }
 
-.select-btn {
-    padding-top: 15px;
-    width: 50%;
-    height: 300px;
-    justify-content: center;
-    background-color: white;
-    border-radius: 30px;
-    margin: 0px 100px;
-    box-shadow: 5px 5px 20px #999;
+#search-btn {
+    width: 100px;
     border: none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px #999;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.select-title-icon {
-    margin: 0 auto;
-    padding-top: 100px;
-    font-size: 50px;
-    font-weight: 300;
-    line-height: 3px;
+
+input {
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px #999;
+    padding: 10px;
+    margin-right: 20px;
+
 }
 
-.select-title-text {
-    font-size: 50px;
-    font-weight: 300;
+#help-keyword {
+    margin: 20px auto;
+    text-align: center;
 }
+
 
 #curation-box {
     display: flex;
@@ -127,6 +131,7 @@ body {
     height: 170px;
     border-radius: 20px 20px 5px 5px;
 }
+
 .card-body {
     padding: 15px;
     height: 100px;
@@ -138,7 +143,7 @@ body {
     display: block;
     overflow: hidden;
     white-space: nowrap;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     text-decoration: none;
     text-shadow: 2px 2px 2px #ebecf0;
 }
@@ -154,3 +159,8 @@ body {
     font-size: 14px;
     font-weight: 10;
 }
+
+.is-hidden {
+    display: none;
+}
+

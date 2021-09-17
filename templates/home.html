@@ -2,29 +2,45 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
+
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
           rel="stylesheet"/>
 
+    <link href='{{ url_for("static", filename="home.css") }}' rel="stylesheet">
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <title>Title</title>
-    <link href='{{ url_for("static", filename="home.css") }}' rel="stylesheet">
+    <!-- Bulma CSS -->
 
+
+
+
+    <!-- CSS Import file -->
     <style>
-        button {
-            width: 100px;
-            margin: 0 auto;
-        }
+
+
     </style>
     <script>
+
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
 
         function getPosts() {
             $('#cards-wrapper').empty()
             let keyword = $('#search-keyword').val()
+
+            if (keyword == "") {
+                $('#help-keyword').removeClass('is-hidden')
+                return
+            } else {
+                $('#help-keyword').addClass('is-hidden')
+
+            }
+
             console.log(keyword)
             $.ajax({
                 type: "POST",
@@ -34,7 +50,7 @@
                 },
                 success: function (response) {
                     let posts = response.posts
-                    for (i=0; i < posts.length; i++) {
+                    for (i = 0; i < posts.length; i++) {
                         let post = posts[i]
                         let temp_html = `
                         <div id="card-wrapper">
@@ -59,14 +75,36 @@
                         $('#cards-wrapper').append(temp_html)
                     }
                 }
-        });
+            });
+        }
+
+        function sign_out() {
+            console.log('불림')
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/"
         }
 
     </script>
 </head>
 <body>
-<input id="search-keyword"type="text">
-<button onclick="getPosts()">검색</button>
+<div>
+<nav id="utility">
+    <div id="nav-left">돼생</div>
+    <div id="nav-right">
+        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+    </div>
+</nav>
+<div id="banner">
+    <p id="banner-icon">😋</p>
+    <p id="banner-title">돼지런한 생활</p>
+</div>
+<div id="search-box">
+    <input id="search-keyword" type="text">
+    <button id="search-btn" onclick="getPosts()">검색</button>
+</div>
+<p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
 <div id="cards-wrapper"></div>
+</div>
 </body>
 </html>
