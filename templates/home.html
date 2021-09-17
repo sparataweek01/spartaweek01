@@ -6,9 +6,9 @@
     <title>돼지런한 생활</title>
 
 
-<meta property="og:title" content="돼지런한 생활" />
-<meta property="og:description" content="나만의 레시피를 공유해보세요!" />
-<meta property="og:image" content="{{ url_for('static', filename='og.png') }}" />
+    <meta property="og:title" content="돼지런한 생활"/>
+    <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
 
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -16,14 +16,14 @@
           rel="stylesheet"/>
     <!-- CSS Import file -->
     <link href='{{ url_for("static", filename="home.css") }}' rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
 
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <!-- Bulma CSS -->
-
-
 
 
     <style>
@@ -96,22 +96,22 @@
 </head>
 <body>
 <div>
-<nav id="utility">
-    <div id="nav-left">돼생</div>
-    <div id="nav-right">
-        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+    <nav id="utility">
+        <div id="nav-left">돼생</div>
+        <div id="nav-right">
+            <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+        </div>
+    </nav>
+    <div id="banner">
+        <p id="banner-icon">😋</p>
+        <p id="banner-title">돼지런한 생활</p>
     </div>
-</nav>
-<div id="banner">
-    <p id="banner-icon">😋</p>
-    <p id="banner-title">돼지런한 생활</p>
-</div>
-<div id="search-box">
-    <input id="search-keyword" type="text">
-    <button id="search-btn" onclick="getPosts()">검색</button>
-</div>
-<p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
-<div id="cards-wrapper"></div>
+    <div id="search-box">
+        <input id="search-keyword" type="text">
+        <button id="search-btn" onclick="getPosts()">검색</button>
+    </div>
+    <p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
+    <div id="cards-wrapper"></div>
 </div>
 </body>
 </html>

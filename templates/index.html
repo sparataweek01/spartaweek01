@@ -12,7 +12,8 @@
           rel="stylesheet"/>
 
     <link href='{{ url_for("static", filename="index.css") }}' rel="stylesheet">
-
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
@@ -30,7 +31,7 @@
 </head>
 <body>
 <nav id="utility">
-    <div id="nav-left">돼생</div>
+    <div id="nav-left">🐷돼생</div>
     <div id="nav-right">
         <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
     </div>
@@ -38,12 +39,13 @@
 <div id="main-cover">
     <div id="banner">
         <p id="banner-icon">😋</p>
-        <p id="banner-title">타이틀이 드루감</p>
+        <p id="banner-title">돼지런한 생활</p>
     </div>
     <div id="select-box">
-        <button id="gooutside" class="select-btn">
+        <button id="gooutside" class="select-btn" style="background-color: black; opacity: 0.5; color: white;">
             <p class="select-title-icon">🍔</p>
             <p class="select-title-text">밖에서</p>
+            <p class="select-title-content">출시 준비 중 🛠</p>
         </button>
         <button
                 id="athome"
@@ -70,8 +72,8 @@
                                     alt="Card image cap"
                             />
                             <div class="card-body">
-                                <a target="_blank" href="#" class="card-title"
-                                >{{ matjip.title }}</a
+                                <div target="_blank" href="#" class="card-title"
+                                >{{ matjip.title }}</div
                                 >
                                 <p class="card-text">{{ matjip.show }} <span>{{ matjip.category }}</span></p>
                                 <p class="card-text comment">{{ matjip.address }}</p>
@@ -92,7 +94,7 @@
                                     alt="Card image cap"
                             />
                             <div class="card-body">
-                                <a target="_blank" href="#" class="card-title"
+                                <a target="_blank" href="{{ recipe.url }}" class="card-title"
                                 >{{ recipe.title }}</a
                                 >
                                 <p class="card-text">{{ recipe.user }} <span>{{ recipe.view }}</span></p>
