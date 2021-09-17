@@ -26,7 +26,7 @@ recipes = soup.select('#contents_area_full > div > ul.common_sp_list_ul.ea4 > li
 
 for recipe in recipes:
     title = recipe.select_one('div.common_sp_caption > div.common_sp_caption_tit.line2').text
-    view = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_buyer').text
+    view = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv > span.common_sp_caption_buyer').text #조회수 숫자 뗴기
     img = recipe.select_one('div.common_sp_thumb > a > img')['src']
     user = recipe.select_one('div.common_sp_caption > div.common_sp_caption_rv_name > a').text
     url = recipe.select_one('div.common_sp_thumb > a')['href']

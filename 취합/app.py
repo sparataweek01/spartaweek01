@@ -27,6 +27,7 @@ def home():
         user_info = db.users.find_one({"username": payload["id"]})
         matjips = list(db.matjips.find({}, {"_id": False}))
         recipes = list(db.recipes.find({}, {"_id": False}))
+        recipes = list(db.recipes.find({}, {"_id": False}))
         return render_template('index.html', user_info=user_info, msg="로그인 완료", matjips=matjips, recipes=recipes)
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))

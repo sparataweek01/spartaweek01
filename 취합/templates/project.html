@@ -12,16 +12,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"#}
+{#          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"#}
+{#          crossorigin="anonymous"></script>#}
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
           integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
           crossorigin="anonymous"></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
+{#            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
+{#            crossorigin="anonymous"></script>#}
+    <!-- JS -->
+{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
 
 
     <title>돼지런한 생활</title>
@@ -269,6 +281,43 @@
             //서버에 저장될 부분
             let title = $('#recipe_title').val();
             let subtitle = $('#subtitle').val();
+            let ingredients = $('#recipe_ingredients').val();
+            let process = $('#recipe_process').val();
+            let time = $('#recipe_time').val();
+            let cost = $('#recipe_cost').val();
+            let category = $('#exampleFormControlSelect1 option:selected').val();
+            let hstag = $('.tag-item').text();
+            let level = $('#exampleFormControlSelect2 option:selected').val();
+
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+            form_data.append("ingredients_give", ingredients)
+            form_data.append("process_give", process)
+            form_data.append("time_give", time)
+            form_data.append("cost_give", cost)
+            form_data.append("category_give", category)
+            form_data.append("ingd_give", ingd)
+            form_data.append("ingd_give", ingd)
+
+            console.log(name, ingd, file, form_data)
+
+
+            $.ajax({
+                type: "POST",
+                url: "/save_img",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"])
+                        //window.location.reload()
+                    }
+                }
+            });
 
 
             // 레시피 등록시 추가되는 카드 부분 구현_완료
@@ -286,13 +335,7 @@
 
             //레시피 모달창 닫기+카드 모달창 구현
             // let title = $('#recipe_title').val();
-            let ingredients = $('#recipe_ingredients').val();
-            let process = $('#recipe_process').val();
-            let time = $('#recipe_time').val();
-            let cost = $('#recipe_cost').val();
-            let category = $('#exampleFormControlSelect1 option:selected').val();
-            let hstag = $('.tag-item').text();
-            let level = $('#exampleFormControlSelect2 option:selected').val();
+
 
             if (append) {
 
@@ -414,11 +457,12 @@
 
         // 레시피 검색 함수
         function getPosts() {
-            $('#cards-wrapper').empty()
+            $('#card-columns').empty()
             let keyword = $('#search-input').val()
 
             if (keyword == "") {
                 $('#help-keyword').removeClass('is-hidden')
+                console.log(keyword)
                 return
             } else {
                 $('#help-keyword').addClass('is-hidden')
@@ -432,6 +476,7 @@
                 },
                 success: function (response) {
                     let posts = response.posts
+                    console.log(posts)
                     for (i = 0; i < posts.length; i++) {
                         let post = posts[i]
                         let temp_html = `
@@ -442,11 +487,11 @@
                                                      src="${post['img-url']}">
                                                 <div class="card-body">
                                                     <h5 class="card-title">${post.title}</h5>
-                                                    <p class="card-text"> ${post.text} </p>
+                                                    <p class="card-text"> ${post.subtitle} </p>
                                                 </div>
                                             </a>
                                         </div>`
-                        $('#cards-wrapper').append(temp_html)
+                        $('#card-columns').append(temp_html)
                     }
                 }
             });
@@ -457,7 +502,7 @@
 
 <body>
 <nav id="utility">
-    <div id="nav-left">🐷돼생</div>
+    <div id="nav-left" onclick="window.location.href ='/'" style="cursor: pointer">🐷돼생</div>
     <div id="nav-right">
         <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
     </div>
@@ -581,7 +626,7 @@
     <div class="User">돼생 유저들의 레시피!지금 바로 볼까요?</div>
     <div id="cards-wrapper">
         <div class="row row-cols-1 row-cols-md-3 g-4 ">
-            <div class="card-columns">
+            <div class="card-columns" id="card-columns">
                 <div class="card">
                     <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
 

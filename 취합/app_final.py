@@ -27,8 +27,8 @@ def home():
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
-        matjips = list(db.matjips.find({}, {"_id": False}))
-        recipes = list(db.recipes.find({}, {"_id": False}))
+        matjips = list(db.matjips.find({}, {"_id": False}).limit(10))
+        # recipes = list(db.recipes.find({}, {"_id": False}))
         top_ten_recipes = list(db.recipes.find({}).sort("review", -1).limit(10))
 
         return render_template('index.html', user_info=user_info, msg="로그인 완료", matjips=matjips, recipes=top_ten_recipes)
@@ -113,6 +113,7 @@ def recipe_page():
 def search():
 
     keyword = request.form['keyword_give']
+    print(keyword)
 
     result1 = list(db.recipes.find({'title': {"$regex": keyword}}))
     result2 = list(db.recipes.find({'title2': {"$regex": keyword}})) #재료
