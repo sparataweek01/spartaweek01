@@ -130,11 +130,6 @@ def search():
 # 레시피 등록
 @app.route('/my_recipe_save', methods=['POST'])
 def my_recipe_save():
-    token_receive = request.cookies.get('mytoken')
-    try:
-        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        username = payload["id"]
-        print(username)
 
         title_receive = request.form['title_give']
         subtitle_receive = request.form['subtitle_give']
@@ -143,7 +138,7 @@ def my_recipe_save():
         time_receive = request.form['time_give']
         cost_receive = request.form['cost_give']
         category_receive = request.form['category_give']
-        hashtag_receive = request.form['hashtag_give']
+        hashtag_receive = request.form['hstag_give']
         level_receive = request.form['recipe_level_give']
 
         if 'file_give' in request.files:
@@ -163,7 +158,8 @@ def my_recipe_save():
                 'cost': cost_receive,
                 'subtitle': subtitle_receive,
                 'category': category_receive,
-                'hashtag': hashtag_receive,
+                'hstag': hashtag_receive,
+                'level': level_receive,
                 "recipe_img": f"{title_receive}.{extension}",
                 "recipe_img_real": file_path,
                 'upload_user': username,
@@ -171,11 +167,37 @@ def my_recipe_save():
                 'img-url': "",
                 'review': "",
             }
-        db.recipes_test.insert_one(doc)
+            print(doc)
+            db.recipes_test.insert_one(doc)
+        else:
+            doc = {
+                'title': title_receive,
+                'ingredients': ingredients_receive,
+                'process': process_receive,
+                'time': time_receive,
+                'cost': cost_receive,
+                'subtitle': subtitle_receive,
+                'category': category_receive,
+                'hstag': hashtag_receive,
+                'level': level_receive,
+                "recipe_img": f"{title_receive}.{extension}",
+                "recipe_img_real": file_path,
+                'upload_user': username,
+                'view': "",
+                'img-url': "",
+                'review': "",
+            }
+            print(doc)
+            db.recipes_test.insert_one(doc)
+        return jsonify({"result": "success", 'msg': 'db 저장 완료.'})
 
-        return jsonify({"result": "success", 'msg': '레시피를 업로드 했습니다.'})
-    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
-        return redirect(url_for("project"))
+
+# 전체 레시피 도출
+@app.route('/home/listing', methods=['GET'])
+def recipe_lists():
+
+    recipe_list_db = list(db.recipes.find({}, {'_id': False}))
+    return jsonify({'result': 'success', 'msg': '전체 레시피 리스트 조회 완료!', 'all_recipe_lists': recipe_list_db})
 
 
 if __name__ == '__main__':

@@ -12,28 +12,27 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-{#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"#}
-{#          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"#}
-{#          crossorigin="anonymous"></script>#}
+    {#    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"#}
+    {#          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"#}
+    {#          crossorigin="anonymous"></script>#}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-          crossorigin="anonymous"></script>
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-          crossorigin="anonymous"></script>
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
-{#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
-{#            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
-{#            crossorigin="anonymous"></script>#}
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>#}
+    {#    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"#}
+    {#            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"#}
+    {#            crossorigin="anonymous"></script>#}
     <!-- JS -->
-{#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
+    {#    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>#}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-
 
 
     <title>돼지런한 생활</title>
@@ -280,14 +279,16 @@
         function share() {
             //서버에 저장될 부분
             let title = $('#recipe_title').val();
-            let subtitle = $('#subtitle').val();
+            let file = $('#recipe_File')[0].files[0]
             let ingredients = $('#recipe_ingredients').val();
             let process = $('#recipe_process').val();
             let time = $('#recipe_time').val();
             let cost = $('#recipe_cost').val();
+            let level = $('#exampleFormControlSelect2 option:selected').val();
+            let subtitle = $('#subtitle').val();
             let category = $('#exampleFormControlSelect1 option:selected').val();
             let hstag = $('.tag-item').text();
-            let level = $('#exampleFormControlSelect2 option:selected').val();
+
 
             let form_data = new FormData()
 
@@ -298,15 +299,15 @@
             form_data.append("time_give", time)
             form_data.append("cost_give", cost)
             form_data.append("category_give", category)
-            form_data.append("ingd_give", ingd)
-            form_data.append("ingd_give", ingd)
+            form_data.append("hstag_give", hstag)
+            form_data.append("level_give", level)
+            form_data.append("subtitle_give", subtitle)
 
-            console.log(name, ingd, file, form_data)
-
+            console.log(form_data)
 
             $.ajax({
                 type: "POST",
-                url: "/save_img",
+                url: "/my_recipe_save",
                 data: form_data,
                 cache: false,
                 contentType: false,
@@ -314,77 +315,73 @@
                 success: function (response) {
                     if (response["result"] == "success") {
                         alert(response["msg"])
-                        //window.location.reload()
                     }
                 }
             });
 
-
             // 레시피 등록시 추가되는 카드 부분 구현_완료
             let card = `<div class="card">
-            <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
+                            <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
 
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">${title}</h5>
-                    <p class="card-text"> ${subtitle} </p>
-                </div>
-            </a></div>`;
+                            <img class="card-img-top"
+                                 src="${file}">
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text"> ${subtitle} </p>
+                            </div>
+                            </a>
+                        </div>`;
             let append = $(".card-columns").append(card);
 
             //레시피 모달창 닫기+카드 모달창 구현
-            // let title = $('#recipe_title').val();
-
-
             if (append) {
 
-
-
-                출처: https://csslab.tistory.com/116 [learning DEV :D ]
-
-                    $("#exampleModalLong").modal("hide");
+                $("#exampleModalLong").modal("hide");
 
                 $('#specific_recipe_modal').empty();
                 //카드모달창 구현
                 let specific_modal = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true" id="#cardMod">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <h1 id="#rptitle">🥩${title}🥩</h1>
-      <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "${category}"이에요!> </span>
-        <img src="" class="photo">
-        <div class="infocenter">
-        <div class="movline1">
-        <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
-        <div class="in">
-        ${ingredients}
+                                            aria-hidden="true" id="#cardMod">
+                                              <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                  <h1 id="#rptitle">🥩${title}🥩</h1>
+                                                  <span style="font-size: 22px; margin: 5px auto 20px auto;">
+                                                    < 이 요리는 "${category}"이에요!> </span>
+                                                    <img src="" class="photo">
+                                                    <div class="infocenter">
+                                                    <div class="movline1">
+                                                    <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+                                                    <div class="in">
+                                                    ${ingredients}
 
-        </div>
-        </div>
-        <div class="movline2">
-        <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
-        <div class="ho">
-        ${process}
-        </div>
-        </div>
-        </div>
-        <h6 id="#time"><br>⏰ 시간 : ${time}</h6>
-        <h6 id="#money"><br>💰 비용 : ${cost}</h6>
-        <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;">  ${level} <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
-        <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>
-        </div>
-        </div>
-        </div> `
+                                                    </div>
+                                                    </div>
+                                                    <div class="movline2">
+                                                    <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+                                                    <div class="ho">
+                                                    ${process}
+                                                    </div>
+                                                    </div>
+                                                    </div>
+                                                    <h6 id="#time"><br>⏰ 시간 : ${time}</h6>
+                                                    <h6 id="#money"><br>💰 비용 : ${cost}</h6>
+                                                    <h6 id="#level"><br>📌 레시피 난이도는 "
+                                                        <span style="color:red;">  ${level} </span>"네요!</h6>
+                                                    <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>
+                                                    </div>
+                                                    </div>
+                                                    </div> `
                 $('#cardMod').append(specific_modal);
+                // alert("레시피 저장 완료!")
             }
-            //  window.location.reload();
+
         }
 
         //  해시태그
         $(document).ready(function () {
             let tag = {};
             let counter = 0;
+            listing_recipe()
 
             // 입력한 값을 태그로 생성한다.
             function addTag(value) {
@@ -497,6 +494,71 @@
             });
         }
 
+        //애초에 홈페이지에 들어왔을 때 카드박스와 안의 디테일을 띄우는 함수
+        function listing_recipe(){
+            $.ajax({
+                type: "GET",
+                url: `/home/listing`,
+                data: {},
+                success: function (response) {
+                    let lists = response.all_recipe_lists
+                    console.log(lists)
+                    $('#card-columns').empty()
+                    $('#cardMod').empty()
+                    for (i = 0; i < lists.length; i++) {
+                        let list = lists[i]
+                        let card = `<div class="card">
+                                        <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
+
+                                            <img class="card-img-top"
+                                                 src="${list['img-url']}">
+                                            <div class="card-body">
+                                                <h5 class="card-title">${list.title}</h5>
+                                                <p class="card-text"> ${list.subtitle} </p>
+                                            </div>
+                                        </a>
+                                    </div>`
+                        $('#card-columns').append(card)
+
+
+                        //카드모달창 구현
+                            let specific_modal = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+                                                    aria-hidden="true" id="#cardMod">
+                                                      <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                          <h1 id="#rptitle">🥩${list.title}🥩</h1>
+                                                          <span style="font-size: 22px; margin: 5px auto 20px auto;">
+                                                            < 이 요리는 "${list.category}"이에요!> </span>
+                                                            <img src="" class="photo">
+                                                            <div class="infocenter">
+                                                            <div class="movline1">
+                                                            <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+                                                            <div class="in">
+                                                            ${list.ingredients}
+
+                                                            </div>
+                                                            </div>
+                                                            <div class="movline2">
+                                                            <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+                                                            <div class="ho">
+                                                            ${list.process}
+                                                            </div>
+                                                            </div>
+                                                            </div>
+                                                            <h6 id="#time"><br>⏰ 시간 : ${list.time}</h6>
+                                                            <h6 id="#money"><br>💰 비용 : ${list.cost}</h6>
+                                                            <h6 id="#level"><br>📌 레시피 난이도는 "
+                                                                <span style="color:red;">  ${list.level} </span>"네요!</h6>
+                                                            <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${list.hashtag}</h6>
+                                                            </div>
+                                                            </div>
+                                                            </div> `
+                        $('#cardMod').append(specific_modal);
+                    }
+                }
+            })
+        }
+
     </script>
 </head>
 
@@ -551,8 +613,8 @@
                                placeholder="레시피명을 적어주세요.">
                     </div>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">완성된 음식 사진을 선택해주세요.</label>
+                        <input type="file" class="custom-file-input" id="recipe_File">
+                        <label class="custom-file-label" for="recipe_File">완성된 음식 사진을 선택해주세요.</label>
                     </div>
                     <div class="explain">
                         <div class="form-group">
