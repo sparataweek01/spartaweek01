@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta property="og:title" content="돼지런한 생활"/>
+    <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"
+          type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+          rel="stylesheet"/>
+
+    <link href='{{ url_for("static", filename="index.css") }}' rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <title>Title</title>
+
+
+    <script>
+        function sign_out() {
+            console.log('불림')
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/"
+        }
+    </script>
+</head>
+<body>
+<nav id="utility">
+    <div id="nav-left" onclick="window.location.href='/'" style="cursor: pointer">🐷돼생</div>
+    <div id="nav-right">
+        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+    </div>
+</nav>
+<div id="main-cover">
+    <div id="banner">
+        <p id="banner-icon">😋</p>
+        <p id="banner-title">돼지런한 생활</p>
+    </div>
+    <div id="select-box">
+        <button id="gooutside" class="select-btn" style="background-color: black; opacity: 0.5; color: white;">
+            <p class="select-title-icon">🍔</p>
+            <p class="select-title-text">밖에서</p>
+            <p class="select-title-content">출시 준비 중 🛠</p>
+        </button>
+        <button
+                id="athome"
+                class="select-btn"
+                onclick="window.location.href = '/home'"
+        >
+            <p class="select-title-icon">👩🏻‍🍳</p>
+            <p class="select-title-text">안에서</p>
+        </button>
+    </div>
+    <div class="curation-title">
+        <h1 class="curation-matjip-title">맛집 추천 리스트</h1>
+        <h1 class="curation-recipe-title">레시피 추천 리스트</h1>
+    </div>
+    <section id="curation-box">
+        <div id="cards-wrapper">
+            {% for matjip in matjips %}
+                <div id="card-wrapper">
+                    <div id="card-component">
+                        <div class="card-1">
+                            <img
+                                    class="card-img-top"
+                                    src="{{ matjip["img-url"] }}"
+                                    alt="Card image cap"
+                            />
+                            <div class="card-body">
+                                <div target="_blank" href="#" class="card-title"
+                                >{{ matjip.title }}</div
+                                >
+                                <p class="card-text">{{ matjip.show }} <span>{{ matjip.category }}</span></p>
+                                <p class="card-text comment">{{ matjip.address }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div id="cards-wrapper">
+            {% for recipe in recipes %}
+                <div id="card-wrapper">
+                    <div id="card-component">
+                        <div class="card-1">
+                            <img
+                                    class="card-img-top"
+                                    src="{{ recipe["img-url"] }}"
+                                    alt="Card image cap"
+                            />
+                            <div class="card-body">
+                                <a target="_blank" href="{{ recipe.url }}" class="card-title"
+                                >{{ recipe.title }}</a
+                                >
+                                <p class="card-text">{{ recipe.user }} <span>{{ recipe.view }}</span></p>
+                                <p class="card-text comment">리뷰수 <b>{{ recipe.review }}</b></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </section>
+</div>
+</body>
+</html>

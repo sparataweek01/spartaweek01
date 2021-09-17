@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+
+    <title>돼지런한 생활</title>
+
+
+    <meta property="og:title" content="돼지런한 생활"/>
+    <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
+    <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"
+          type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap"
+          rel="stylesheet"/>
+    <!-- CSS Import file -->
+    <link href='{{ url_for("static", filename="home.css") }}' rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+    <!-- Bulma CSS -->
+
+
+    <style>
+
+
+    </style>
+    <script>
+
+        {% if msg %}
+            alert("{{ msg }}")
+        {% endif %}
+
+        function getPosts() {
+            $('#cards-wrapper').empty()
+            let keyword = $('#search-keyword').val()
+
+            if (keyword == "") {
+                $('#help-keyword').removeClass('is-hidden')
+                return
+            } else {
+                $('#help-keyword').addClass('is-hidden')
+
+            }
+
+            console.log(keyword)
+            $.ajax({
+                type: "POST",
+                url: `/home/posts`,
+                data: {
+                    keyword_give: keyword
+                },
+                success: function (response) {
+                    let posts = response.posts
+                    for (i = 0; i < posts.length; i++) {
+                        let post = posts[i]
+                        let temp_html = `
+                        <div id="card-wrapper">
+                            <div id="card-component">
+                                <div class="card-1">
+                                    <img
+                                            class="card-img-top"
+                                            src="${post['img-url']}"
+                                            alt="Card image cap"
+                                    />
+                                    <div class="card-body">
+                                        <a target="_blank" href="#" class="card-title"
+                                        >${post.title}</a
+                                        >
+                                        <p class="card-text">${post.user} <span>${post.view}</span></p>
+                                        <p class="card-text comment">리뷰수 <b>${post.review}</b></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>`
+
+                        $('#cards-wrapper').append(temp_html)
+                    }
+                }
+            });
+        }
+
+        function sign_out() {
+            console.log('불림')
+            $.removeCookie('mytoken', {path: '/'});
+            alert('로그아웃!')
+            window.location.href = "/"
+        }
+
+    </script>
+</head>
+<body>
+<div>
+    <nav id="utility">
+        <div id="nav-left" onclick="window.location.href='/'" style="cursor: pointer">돼생</div>
+        <div id="nav-right">
+            <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+        </div>
+    </nav>
+    <div id="banner">
+        <p id="banner-icon">😋</p>
+        <p id="banner-title">돼지런한 생활</p>
+    </div>
+    <div id="search-box">
+        <input id="search-keyword" type="text">
+        <button id="search-btn" onclick="getPosts()">검색</button>
+    </div>
+    <p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
+    <div id="cards-wrapper"></div>
+</div>
+</body>
+</html>
