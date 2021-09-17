@@ -211,12 +211,8 @@
     function share() {
       //서버에 저장될 부분
       let title = $('#recipe_title').val();
-            let ingredients = $('#recipe_ingredients').val();
-            let process = $('#recipe_process').val();
-            let time = $('#recipe_time').val();
-            let cost = $('#recipe_cost').val();
-            let subtitle = $('#subtitle').val();
-            let hstag = $('#tag').val()
+      let subtitle = $('#subtitle').val();
+
 
       // 레시피 등록시 추가되는 카드 부분 구현_완료
       let card = `<div class="card">
@@ -233,110 +229,124 @@
 
       //레시피 모달창 닫기+카드 모달창 구현
       if (append) {
+
+       let title = $('#recipe_title').val();
+      let ingredients = $('#recipe_ingredients').val();
+      let process = $('#recipe_process').val();
+      let time = $('#recipe_time').val();
+      let cost = $('#recipe_cost').val();
+      let subtitle = $('#subtitle').val();
+      let hstag = $('#tag').val()
+
         $("#exampleModalLong").modal("hide");
+
+        $('#specific_recipe_modal').empty();
+        //카드모달창 구현
         let specific_modal = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
      aria-hidden="true" id="#cardMod">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <h1 id="#rptitle">🥩${title}🥩</h1>
       <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "gkdtlr"이에요!> </span> <!--  한식 양식 중식 일식 기타 선택 텍스트   -->
-      <img src="" class="photo"> <!-- 완성된 사진  -->
-      <div class="infocenter">
+        <img src="" class="photo"> <!-- 완성된 사진  -->
+        <div class="infocenter">
         <div class="movline1">
-          <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
-          <div class="in">
-            ${ingredients}
+        <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+        <div class="in">
+        ${ingredients}
 
-          </div>
+        </div>
         </div>
         <div class="movline2">
-          <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
-          <div class="ho">
-           ${process}
-          </div>
+        <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+        <div class="ho">
+        ${process}
         </div>
-      </div>
-      <h6 id="#time"><br>⏰ 시간 : ${time}</h6>
-      <h6 id="#money"><br>💰 비용 : ${cost}</h6>
-      <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;"> <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
-      <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>
-    </div>
-  </div>
-</div>`
-      $('#cardMod').append(specific_modal);
+        </div>
+        </div>
+        <h6 id="#time"><br>⏰ 시간 : ${time}</h6>
+        <h6 id="#money"><br>💰 비용 : ${cost}</h6>
+        <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;"> <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
+        <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>
+        </div>
+        </div>
+        </div>`
+        $('#cardMod').append(specific_modal);
+              $('#recipe_title, #customFile, #recipe_ingredients, #recipe_process, #recipe_time,#recipe_cost,#subtitle,#subtitle').empty();
 
-      }
-    }
+        }
 
-
-
-
-
+        }
 
 
-    //  해시태그
-    $(document).ready(function () {
-      let tag = {};
-      let counter = 0;
 
-      // 입력한 값을 태그로 생성한다.
-      function addTag(value) {
+
+
+
+
+        //  해시태그
+        $(document).ready(function () {
+        let tag = {};
+        let counter = 0;
+
+          // 입력한 값을 태그로 생성한다.
+        function addTag(value) {
         tag[counter] = value;
         counter++; // del-btn 의 고유 id 가 된다.
-      }
+        }
 
-      // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
-      function marginTag() {
+          // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+        function marginTag() {
         return Object.values(tag).filter(function (word) {
-          return word !== "";
+        return word !== "";
         });
-      }
+        }
 
-      // 서버에 제공
-      $("#tag-form").on("submit", function (e) {
+          // 서버에 제공
+        $("#tag-form").on("submit", function (e) {
         let value = marginTag(); // return array
         $("#rdTag").val(value);
 
         $(this).submit();
-      });
+        });
 
-      $("#tag").on("keypress", function (e) {
+        $("#tag").on("keypress", function (e) {
         let self = $(this);
 
-        //엔터나 스페이스바 눌렀을때 실행
+          //엔터나 스페이스바 눌렀을때 실행
         if (e.key === "Enter" || e.keyCode == 32) {
 
-          let tagValue = self.val(); // 값 가져오기
+        let tagValue = self.val(); // 값 가져오기
 
           // 해시태그 값 없으면 실행X
-          if (tagValue !== "") {
+        if (tagValue !== "") {
 
-            // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
-            let result = Object.values(tag).filter(function (word) {
-              return word === tagValue;
-            })
+          // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+        let result = Object.values(tag).filter(function (word) {
+        return word === tagValue;
+        })
 
-            // 해시태그가 중복되었는지 확인
-            if (result.length == 0) {
-              $("#tag-list").append("<li class='tag-item'>" + tagValue + "<span class='del-btn' idx='" + counter + "'>x</span></li>");
-              addTag(tagValue);
-              self.val("");
-            } else {
-              alert("태그값이 중복됩니다.");
-            }
-          }
-          e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+          // 해시태그가 중복되었는지 확인
+        if (result.length == 0) {
+        $("#tag-list").append("<li class='tag-item'>" + tagValue + "<span class='del-btn' idx='" + counter + "'>x</span></li>");
+        addTag(tagValue);
+        self.val("");
+        } else {
+        alert("태그값이 중복됩니다.");
         }
-      });
+        }
+        e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+        }
+        });
 
-      // 삭제 버튼
-      // 인덱스 검사 후 삭제
-      $(document).on("click", ".del-btn", function (e) {
+          // 삭제 버튼
+          // 인덱스 검사 후 삭제
+        $(document).on("click", ".del-btn", function (e) {
         let index = $(this).attr("idx");
         tag[index] = "";
         $(this).parent().remove();
-      });
-    })
+        });
+        })
 
   </script>
 </head>
@@ -483,16 +493,27 @@
   <div class="row row-cols-1 row-cols-md-3 g-4 ">
     <div class="card-columns">
       <div class="card">
-      <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
+        <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
 
-        <img class="card-img-top"
-             src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-        <div class="card-body">
-          <h5 class="card-title">토마토 파스타 레시피</h5>
-          <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-        </div>
-      </a></div>
-    <div class="card">
+          <img class="card-img-top"
+               src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+          <div class="card-body">
+            <h5 class="card-title">토마토 파스타 레시피</h5>
+            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+          </div>
+        </a></div>
+      <div class="card">
+        <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+
+          <img class="card-img-top"
+               src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+          <div class="card-body">
+            <h5 class="card-title">토마토 파스타 레시피</h5>
+            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+          </div>
+        </a></div>
+      <div class="card"
+      ">
       <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
         <img class="card-img-top"
@@ -513,37 +534,26 @@
         <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
       </div>
     </a></div>
-  <div class="card"
-  ">
-  <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+  <div class="card">
+    <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-    <img class="card-img-top"
-         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-    <div class="card-body">
-      <h5 class="card-title">토마토 파스타 레시피</h5>
-      <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-    </div>
-  </a></div>
-<div class="card">
-  <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+      <img class="card-img-top"
+           src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+      <div class="card-body">
+        <h5 class="card-title">토마토 파스타 레시피</h5>
+        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+      </div>
+    </a></div>
+  <div class="card">
+    <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
 
-    <img class="card-img-top"
-         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-    <div class="card-body">
-      <h5 class="card-title">토마토 파스타 레시피</h5>
-      <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-    </div>
-  </a></div>
-<div class="card">
-  <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-    <img class="card-img-top"
-         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-    <div class="card-body">
-      <h5 class="card-title">토마토 파스타 레시피</h5>
-      <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-    </div>
-  </a></div>
+      <img class="card-img-top"
+           src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+      <div class="card-body">
+        <h5 class="card-title">토마토 파스타 레시피</h5>
+        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+      </div>
+    </a></div>
 </div>
 </div>
 </div>
