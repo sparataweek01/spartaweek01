@@ -200,16 +200,14 @@
     </style>
     <!--  스크립트 삽입  -->
     <script>
-        $(document).ready(function () {
-            show_cards();
-        })
 
         function respBt() {
             $("#RespModal").modal("show");
         }
 
         function cancel() {
-            alert("레시피 공유를 취소하시겠습니까?")
+            // alert("레시피 공유를 취소하시겠습니까?")
+            $("#RespModal").modal("hide");
         }
 
         function share() { //모달에 입력한 값들을 가져와서 db등록으로 보내는 것 / 구현 완료
