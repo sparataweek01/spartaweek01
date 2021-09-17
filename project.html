@@ -2,683 +2,439 @@
 <html lang="ko">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
-
-
-    <title>돼지런한 생활</title>
-    <style>
-        * {
-            font-family: 'Do Hyeon', sans-serif;
-        }
-
-        body {
-            background-color: #ffe126;
-        }
-
-
-        * {
-            font-family: "Do Hyeon"
-        }
-
-        #utility {
-            display: flex;
-            font-size: 25px;
-            padding: 20px;
-        }
-
-        #nav-left {
-            width: 50%;
-            padding: 20px;
-
-        }
-
-
-        #nav-right {
-            width: 50%;
-            text-align: right;
-            padding: 20px;
-
-        }
-
-        #sing-out-btn {
-            width: 80px;
-            height: 50px;
-            background-color: black;
-            color: #ffe126;
-            font-size: 18px;
-        }
-
-        .name, .text {
-            display: inline;
-            position: absolute;
-        }
-
-        .name {
-            top: 10px;
-            right: 20px;
-            font-size: 32px;
-            font-weight: bold;
-        }
-
-        .text {
-            top: 20px;
-            left: 20px;
-            font-size: 15px;
-            font-weight: bold;
-            color: rgba(100, 100, 100, 0.5);
-        }
-
-        #search-box {
-            width: 550px;
-            margin: 80px auto 0 auto;
-            max-width: 700px;
-            display: block;
-        }
-
-        #search-input {
-            width: 450px;
-            border-width: 4px;
-            border-color: black;
-            text-align: center;
-            font-size: 20px;
-        }
-
-        #search-btn {
-            height: 40px;
-            width: 60px;
-            border-radius: 9px;
-            border-color: black;
-            color: white;
-        }
-
-        .recispe {
-            width: 420px;
-            margin: 50px auto 0 auto;
-        }
-
-        .adcard {
-            margin: auto;
-            height: 200px;
-            width: 100;
-            background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMjFfMTk4%2FMDAxNTcxNjA5Mzc3NjUy.1wO6YRNek3RPugUAMDRfXIA6tUpS7tUhECh7K-xpHNQg.b2V2xRk0dNpVRl73O4GU8YOlx4nAL8Y3wj-DUflFUSkg.JPEG.chkh26%2FKakaoTalk_20191021_053445957_03.jpg&type=sc960_832");
-            background-size: 110%;
-            background-position: center;
-        }
-
-        card-body {
-            margin: 20px;
-        }
-
-        .card, form-control, .recispe, .rbtn, .inputRe, .card-body, #search-input, .in, .ho {
-            border-radius: 15px;
-        }
-
-        .inputRe {
-            border: solid 1px white;
-            margin: 15px auto 50px auto;
-            background-color: white;
-            text-align: center;
-            font-size: 19px;
-            font-weight: bold;
-            padding-top: 34px;
-            width: 500px;
-            height: 200px;
-        }
-
-        .rbtn {
-            display: block;
-            width: 200px;
-            margin: 20px auto 0 auto;
-            font-size: 20px;
-        }
-
-        .rbtn, #search-btn {
-            background-color: black;
-            border-color: #ced4da;
-            color: white;
-        }
-
-        .card-columns {
-            margin: 50px auto;
-            width: 800px;
-        }
-
-        .cardS {
-            background-color: rgba(255, 255, 198, 0.7);
-            width: 100%
-        }
-
-        .card img {
-            width: 240px;
-            margin-top: 9px;
-            margin-left: 6px;
-        }
-
-        a {
-            color: black;
-        }
-
-        .respTurn {
-            height: 350px;
-        }
-
-        .explain {
-            margin-top: 20px;
-        }
-
-        .User {
-            display: block;
-            font-size: 40px;
-            text-align: center;
-            height: 30px;
-            padding: 30px;
-        }
-
-        #tag {
-            width: 250px;
-            border: 1px solid #ced4da;
-            border-radius: .25rem;
-            text-align: center;
-        }
-
-        .in {
-            border: solid 3px black;
-            width: 80%;
-            height: auto;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .ho {
-            border: solid 3px black;
-            width: 80%;
-            height: auto;
-            margin: auto;
-            padding: 20px;
-        }
-
-        .modal-content {
-            text-align: center;
-        }
-
-        .infocenter {
-            margin: auto;
-            width: 100%;
-        }
-
-        .line1, .line2 {
-            margin-bottom: 4px;
-            font-size: 19px;
-        }
-
-        h6 {
-            font-size: 16px;
-        }
-
-        .movline1, .movline2 {
-            margin-top: 25px;
-        }
-
-        .level {
-            width: 200px;
-            margin: 20px auto 20px auto;
-
-        }
-
-        .is-hidden {
-            display: none;
-        }
-
-        #help-keyword {
-            margin: 20px auto;
-            text-align: center;
-        }
-
-
-    </style>
-    <!--  스크립트 삽입  -->
-    <script>
-        function respBt() {
-            $("#RespModal").modal("show");
-        }
-
-        function cancel() {
-            alert("레시피 공유를 취소하시겠습니까?")
-        }
-
-        function share() {
-            //서버에 저장될 부분
-            let title = $('#recipe_title').val();
-            let subtitle = $('#subtitle').val();
-
-
-            // 레시피 등록시 추가되는 카드 부분 구현_완료
-            let card = `<div class="card">
-            <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
-
-                <img class="card-img-top"
-                     src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                <div class="card-body">
-                    <h5 class="card-title">${title}</h5>
-                    <p class="card-text"> ${subtitle} </p>
-                </div>
-            </a></div>`;
-            let append = $(".card-columns").append(card);
-
-            //레시피 모달창 닫기+카드 모달창 구현
-            if (append) {
-
-                let title = $('#recipe_title').val();
-                let ingredients = $('#recipe_ingredients').val();
-                let process = $('#recipe_process').val();
-                let time = $('#recipe_time').val();
-                let cost = $('#recipe_cost').val();
-                let category = $('#exampleFormControlSelect1 option:selected').val();
-                let hstag = $('.tag-item').text();
-                let level = $('#exampleFormControlSelect2 option:selected').val();
-
-                출처: https://csslab.tistory.com/116 [learning DEV :D ]
-
-                    $("#exampleModalLong").modal("hide");
-
-                $('#specific_recipe_modal').empty();
-                //카드모달창 구현
-                let specific_modal = `<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true" id="#cardMod">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <h1 id="#rptitle">🥩${title}🥩</h1>
-      <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "${category}"이에요!> </span> <!--  한식 양식 중식 일식 기타 선택 텍스트   -->
-        <img src="" class="photo"> <!-- 완성된 사진  -->
-        <div class="infocenter">
-        <div class="movline1">
-        <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
-        <div class="in">
-        ${ingredients}
-
-        </div>
-        </div>
-        <div class="movline2">
-        <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
-        <div class="ho">
-        ${process}
-        </div>
-        </div>
-        </div>
-        <h6 id="#time"><br>⏰ 시간 : ${time}</h6>
-        <h6 id="#money"><br>💰 비용 : ${cost}</h6>
-        <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;">  ${level} <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
-        <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>
-        </div>
-        </div>
-        </div>`
-                $('#cardMod').append(specific_modal);
-            }
-            //  window.location.reload();
-        }
-
-        //  해시태그
-        $(document).ready(function () {
-            let tag = {};
-            let counter = 0;
-
-            // 입력한 값을 태그로 생성한다.
-            function addTag(value) {
-                tag[counter] = value;
-                counter++; // del-btn 의 고유 id 가 된다.
-            }
-
-            // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
-            function marginTag() {
-                return Object.values(tag).filter(function (word) {
-                    return word !== "";
-                });
-            }
-
-            // 서버에 제공
-            $("#tag-form").on("submit", function (e) {
-                let value = marginTag(); // return array
-                $("#rdTag").val(value);
-
-                $(this).submit();
-            });
-
-            $("#tag").on("keypress", function (e) {
-                let self = $(this);
-
-                //엔터나 스페이스바 눌렀을때 실행
-                if (e.key === "Enter" || e.keyCode == 32) {
-
-                    let tagValue = self.val(); // 값 가져오기
-
-                    // 해시태그 값 없으면 실행X
-                    if (tagValue !== "") {
-
-                        // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
-                        let result = Object.values(tag).filter(function (word) {
-                            return word === tagValue;
-                        })
-
-                        // 해시태그가 중복되었는지 확인
-                        if (result.length == 0) {
-                            $("#tag-list").append("<li class='tag-item'>" + tagValue);
-                            addTag(tagValue);
-                            self.val("");
-                        } else {
-                            alert("태그값이 중복됩니다.");
-                        }
-                    }
-                    e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
-                }
-            });
-
-            // 삭제 버튼
-            // 인덱스 검사 후 삭제
-            $(document).on("click", ".del-btn", function (e) {
-                let index = $(this).attr("idx");
-                tag[index] = "";
-                $(this).parent().remove();
-            });
-        })
-
-
-        //로그아웃
-        function sign_out() {
-            console.log('불림')
-            $.removeCookie('mytoken', {path: '/'});
-            alert('로그아웃!')
-            window.location.href = "/"
-        }
-
-
-        // 레시피 검색 함수
-        function getPosts() {
-            $('#cards-wrapper').empty()
-            let keyword = $('#search-input').val()
-
-            if (keyword == "") {
-                $('#help-keyword').removeClass('is-hidden')
-                return
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+          integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+          crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+          integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+          crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+  <title>레시피 상세페이지</title>
+  <style>
+    * {
+      font-family: 'Do Hyeon', sans-serif;
+    }
+
+    body {
+      background-color: #ffe126;
+    }
+
+    .name, .text {
+      display: inline;
+      position: absolute;
+    }
+
+    .name {
+      top: 10px;
+      right: 20px;
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    .text {
+      top: 20px;
+      left: 20px;
+      font-size: 15px;
+      font-weight: bold;
+      color: rgba(100, 100, 100, 0.5);
+    }
+
+    #search-box {
+      width: 550px;
+      margin: 80px auto 0 auto;
+      max-width: 700px;
+      display: block;
+    }
+
+    #search-input {
+      width: 450px;
+      border-width: 4px;
+      border-color: black;
+      text-align: center;
+      font-size: 20px;
+    }
+
+    #search-btn {
+      height: 40px;
+      width: 60px;
+      border-radius: 9px;
+      border-color: black;
+      color: white;
+    }
+
+    .recispe {
+      width: 420px;
+      margin: 50px auto 0 auto;
+    }
+
+    .adcard {
+      margin: auto;
+      height: 200px;
+      width: 100;
+      background-image: url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTEwMjFfMTk4%2FMDAxNTcxNjA5Mzc3NjUy.1wO6YRNek3RPugUAMDRfXIA6tUpS7tUhECh7K-xpHNQg.b2V2xRk0dNpVRl73O4GU8YOlx4nAL8Y3wj-DUflFUSkg.JPEG.chkh26%2FKakaoTalk_20191021_053445957_03.jpg&type=sc960_832");
+      background-size: 110%;
+      background-position: center;
+    }
+
+    card-body {
+      margin: 20px;
+    }
+
+    .card, form-control, .recispe, .rbtn, .inputRe, .card-body, #search-input {
+      border-radius: 15px;
+    }
+
+    .inputRe {
+      border: solid 1px white;
+      margin: 15px auto 50px auto;
+      background-color: white;
+      text-align: center;
+      font-size: 19px;
+      font-weight: bold;
+      padding-top: 34px;
+      width: 500px;
+      height: 200px;
+    }
+
+    .rbtn {
+      display: block;
+      width: 200px;
+      margin: 20px auto 0 auto;
+      font-size: 20px;
+    }
+
+    .rbtn, #search-btn {
+      background-color: black;
+      border-color: #ced4da;
+      color: white;
+    }
+
+    .card-columns {
+      margin: 50px auto;
+      width: 800px;
+    }
+
+    .cardS {
+      background-color: rgba(255, 255, 198, 0.7);
+      width: 100%
+    }
+
+    .card img {
+      width: 240px;
+      margin-top: 9px;
+      margin-left: 6px;
+    }
+
+    a {
+      color: black;
+    }
+
+    .respTurn {
+      height: 350px;
+    }
+
+    .explain {
+      margin-top: 20px;
+    }
+
+    .User {
+      display: block;
+      font-size: 40px;
+      text-align: center;
+      height: 30px;
+      padding: 30px;
+    }
+
+    #tag {
+      width: 250px;
+      border: 1px solid #ced4da;
+      border-radius: .25rem;
+      text-align: center;
+    }
+
+
+  </style>
+  <!--  스크립트 삽입  -->
+  <script>
+    function respBt() {
+      $("#RespModal").modal("show");
+    }
+
+    function cancel() {
+      alert("레시피 공유를 취소하시겠습니까?")
+    }
+
+    function share() {
+      //서버에 저장될 부분
+      let title = $('#recipe_title').val();
+      let subtitle = $('#subtitle').val();
+      let img =
+        //이미지 변수에는 사진이 저장된 데이터 삽입
+
+
+        // 레시피 등록시 추가되는 카드 부분 구현_완료
+      card = `
+      <div class="card">
+        <a href="resp.html" class="n" onclick="move()">
+          <img class="card-img-top" src="">
+          <div class="card-body">
+            <h5 class="card-title">${title}</h5>
+            <p class="card-text">${subtitle} </p>
+          </div>
+        </a>
+      </div>`
+      $('.card-columns').append(card);
+      $('#exampleModalLong').modal("hide")
+    }
+
+    // function move(){
+    //
+    // }
+
+
+
+
+
+
+      //카드 모달창 구현
+      let title = $('#recipe_title').val()
+      let ingredients = $('#recipe_ingredients').val();
+      let process = $('#recipe_process').val();
+      let time = $('#recipe_time').val();
+      let cost = $('#recipe_cost').val();
+      let category = $('#exampleFormControlSelect1 option:selected').val();
+      // let hstag = $('.tag-item').text();
+      let level = $('#exampleFormControlSelect2 option:selected').val();
+      // let img = document.getElementById('fileInput');
+
+
+      출처: https://csslab.tistory.com/116 [learning DEV :D ]
+
+
+
+
+
+
+
+    //  해시태그
+    $(document).ready(function () {
+      let tag = {};
+      let counter = 0;
+
+      // 입력한 값을 태그로 생성한다.
+      function addTag(value) {
+        tag[counter] = value;
+        counter++; // del-btn 의 고유 id 가 된다.
+      }
+
+      // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+      function marginTag() {
+        return Object.values(tag).filter(function (word) {
+          return word !== "";
+        });
+      }
+
+      // 서버에 제공
+      $("#tag-form").on("submit", function (e) {
+        let value = marginTag(); // return array
+        $("#rdTag").val(value);
+
+        $(this).submit();
+      });
+
+      $("#tag").on("keypress", function (e) {
+        let self = $(this);
+
+        //엔터나 스페이스바 눌렀을때 실행
+        if (e.key === "Enter" || e.keyCode == 32) {
+
+          let tagValue = self.val(); // 값 가져오기
+
+          // 해시태그 값 없으면 실행X
+          if (tagValue !== "") {
+
+            // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+            let result = Object.values(tag).filter(function (word) {
+              return word === tagValue;
+            })
+
+            // 해시태그가 중복되었는지 확인
+            if (result.length == 0) {
+              $("#tag-list").append("<li class='tag-item'>" + tagValue);
+              addTag(tagValue);
+              self.val("");
             } else {
-                $('#help-keyword').addClass('is-hidden')
+              alert("태그값이 중복됩니다.");
             }
-
-            $.ajax({
-                type: "POST",
-                url: `/home/posts`,
-                data: {
-                    keyword_give: keyword
-                },
-                success: function (response) {
-                    let posts = response.posts
-                    for (i = 0; i < posts.length; i++) {
-                        let post = posts[i]
-                        let temp_html = `
-                                        <div class="card">
-                                            <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
-
-                                                <img class="card-img-top"
-                                                     src="${post['img-url']}">
-                                                <div class="card-body">
-                                                    <h5 class="card-title">${post.title}</h5>
-                                                    <p class="card-text"> ${post.text} </p>
-                                                </div>
-                                            </a>
-                                        </div>`
-                        $('#cards-wrapper').append(temp_html)
-                    }
-                }
-            });
+          }
+          e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
         }
+      });
 
-    </script>
+      // 삭제 버튼
+      // 인덱스 검사 후 삭제
+      $(document).on("click", ".del-btn", function (e) {
+        let index = $(this).attr("idx");
+        tag[index] = "";
+        $(this).parent().remove();
+      });
+    })
+
+    function are() {
+
+    }
+
+  </script>
 </head>
 
 <body>
-<nav id="utility">
-    <div id="nav-left">🐷돼생</div>
-    <div id="nav-right">
-        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
-    </div>
-</nav>
+<p class="name" ><a href="#메인화면">🐷돼생</a></p>
+<h6 class="text">.오늘먹을 음식을 내일로 미루지마라_Piggy life.</h6>
 <!--음식 검색란-->
 <div id="search-box">
-    <input id="search-input" type="text" placeholder="무엇을 먹을까요?">
-    <button id="search-btn" onclick="getPosts()"> 검색</button>
+  <input id="search-input" type="text" placeholder="무엇을 먹을까요?">
+  <button id="search-btn"> 검색</button>
 </div>
-<p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
 <!--광고란-->
 <div class="recispe">
-    <div class="card adcard">
-        <div class="card-body">
-            <h2 class="card-title" style="color: white"> 오늘의 레시피 </h2>
-            <h5><p class="card-text" style="color: white"> 레시피 공유하고 1,000원 받자! </p></h5>
-        </div>
+  <div class="card adcard">
+    <div class="card-body">
+      <h2 class="card-title" style="color: white"> 오늘의 레시피 </h2>
+      <h5><p class="card-text" style="color: white"> 레시피 공유하고 1,000원 받자! </p></h5>
     </div>
+  </div>
 </div>
 <!--레시피 올리는 부분-->
 <div class="inputRe">
-    <p>내가 만들었지만 너무 맛있는 레시피!</p>
-    <p> 지금 공유하러 갈까요?</p>
-    <button type="button" class="btn btn-primary rbtn" data-toggle="modal" data-target="#exampleModalLong"
-            aria-pressed="false" autocomplete="off" onclick="respBt()">
-        레시피 공유하기
-    </button>
+  <p>내가 만들었지만 너무 맛있는 레시피!</p>
+  <p> 지금 공유하러 갈까요?</p>
+  <button type="button" class="btn btn-primary rbtn" data-toggle="modal" data-target="#exampleModalLong"
+          aria-pressed="false" autocomplete="off" onclick="respBt()">
+    레시피 공유하기
+  </button>
 </div>
 </div>
 <!--레시피 모달-->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
      aria-hidden="true">
-    <div class="modal-dialog" role="document" id="#M">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">레시피를 공유해주세요!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal-dialog" role="document" id="#M">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">레시피를 공유해주세요!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipe_title">어떤음식을 만드셨나요?</label>
+            <input type="email" class="form-control" id="recipe_title"
+                   placeholder="레시피명을 적어주세요.">
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="customFile">
+            <label class="custom-file-label" for="customFile">완성된 음식 사진을 선택해주세요.</label>
+          </div>
+          <div class="explain">
+            <div class="form-group">
+              <label for="recipe_ingredients">레시피에 들어가는 재료는 뭔가요?</label>
+              <textarea class="form-control" id="recipe_ingredients" rows="3"
+                        placeholder="레시피 재료와 양을 적어주세요."></textarea>
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="recipe_title">어떤음식을 만드셨나요?</label>
-                        <input type="email" class="form-control" id="recipe_title"
-                               placeholder="레시피명을 적어주세요.">
-                    </div>
-                    <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile">
-                        <label class="custom-file-label" for="customFile">완성된 음식 사진을 선택해주세요.</label>
-                    </div>
-                    <div class="explain">
-                        <div class="form-group">
-                            <label for="recipe_ingredients">레시피에 들어가는 재료는 뭔가요?</label>
-                            <textarea class="form-control" id="recipe_ingredients" rows="3"
-                                      placeholder="레시피 재료와 양을 적어주세요."></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="recipe_process">레시피를 자세히 적어볼까요?</label>
-                            <textarea class="form-control respTurn" id="recipe_process" rows="3"
-                                      placeholder="레시피 순서를 자세히 적어주세요."></textarea>
-                        </div>
-                    </div>
-                    <form>
-                        <div class="form-row">
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?" id="recipe_time">
-                            </div>
-                            <div class="col">
-                                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?" id="recipe_cost">
-                            </div>
-                        </div>
-                        <div class="level">
-                            <label for="exampleFormControlSelect2">레시피의 난이도는 어떤가요?</label>
-                            <select class="form-control" id="exampleFormControlSelect2">
-                                <option>쉬워요</option>
-                                <option>할만해요</option>
-                                <option>어려워요</option>
-                            </select>
-                        </div>
-                    </form>
-                    <div class="form-group">
-                        <label for="subtitle">레시피 총평을 적어주세요.</label>
-                        <textarea class="form-control" id="subtitle" rows="3"></textarea>
-                    </div>
-                    <div class="category">
-                        <label for="exampleFormControlSelect1">음식의 카테고리를 선택해주세요!</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
-                            <option>한식</option>
-                            <option>중식</option>
-                            <option>양식</option>
-                            <option>일식</option>
-                            <option>기타</option>
-                        </select>
-                    </div>
-                </form>
-                <div class="tr_hashTag_area">
-                    <p style="margin:20px auto 6px auto; ">어떤 분위기에 어울리나요?</p>
-                    <div class="form-group">
-                        <input type="hidden" value="" name="tag" id="rdTag"/>
-                    </div>
+            <div class="form-group">
+              <label for="recipe_process">레시피를 자세히 적어볼까요?</label>
+              <textarea class="form-control respTurn" id="recipe_process" rows="3"
+                        placeholder="레시피 순서를 자세히 적어주세요."></textarea>
+            </div>
+          </div>
+          <form>
+            <div class="form-row">
+              <div class="col">
+                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?" id="recipe_time">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?" id="recipe_cost">
+              </div>
+            </div>
+            <div class="level">
+              <label for="exampleFormControlSelect2">레시피의 난이도는 어떤가요?</label>
+              <select class="form-control" id="exampleFormControlSelect2">
+                <option>쉬워요</option>
+                <option>할만해요</option>
+                <option>어려워요</option>
+              </select>
+            </div>
+          </form>
+          <div class="form-group">
+            <label for="subtitle">레시피 총평을 적어주세요.</label>
+            <textarea class="form-control" id="subtitle" rows="3"></textarea>
+          </div>
+          <div class="category">
+            <label for="exampleFormControlSelect1">음식의 카테고리를 선택해주세요!</label>
+            <select class="form-control" id="exampleFormControlSelect1">
+              <option>한식</option>
+              <option>중식</option>
+              <option>양식</option>
+              <option>일식</option>
+              <option>기타</option>
+            </select>
+          </div>
+        </form>
+        <div class="tr_hashTag_area">
+          <p style="margin:20px auto 6px auto; ">어떤 분위기에 어울리나요?</p>
+          <div class="form-group">
+            <input type="hidden" value="" name="tag" id="rdTag"/>
+          </div>
 
-                    <ul id="tag-list"></ul>
+          <ul id="tag-list"></ul>
 
-                    <div class="form-group">
-                        <input type="text" id="tag" size="7" placeholder="#집밥 #piggylife #yolo">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
-                <button type="button" class="btn btn-primary" onclick="share(); " name="shareBt">레시피 공유!
-                </button>
-            </div>
+          <div class="form-group">
+            <input type="text" id="tag" size="7" placeholder="#집밥 #piggylife #yolo">
+          </div>
         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="cancel()">취소</button>
+        <button type="button" class="btn btn-primary" onclick="share(); " name="shareBt">레시피 공유!
+        </button>
+      </div>
     </div>
+  </div>
 </div>
 
 <!--  카드  -->
-<div class="cardS" id="#a">
-    <div class="User">돼생 유저들의 레시피!지금 바로 볼까요?</div>
-    <div id="cards-wrapper">
-        <div class="row row-cols-1 row-cols-md-3 g-4 ">
-            <div class="card-columns">
-                <div class="card">
-                    <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
-
-                        <img class="card-img-top"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                        <div class="card-body">
-                            <h5 class="card-title">토마토 파스타 레시피</h5>
-                            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="card">
-                    <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-                        <img class="card-img-top"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                        <div class="card-body">
-                            <h5 class="card-title">토마토 파스타 레시피</h5>
-                            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                        </div>
-                    </a></div>
-                <div class="card">
-                    <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-                        <img class="card-img-top"
-                             src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                        <div class="card-body">
-                            <h5 class="card-title">토마토 파스타 레시피</h5>
-                            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                        </div>
-                    </a></div>
-                <div class="card"
-                ">
-                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-                    <img class="card-img-top"
-                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                    <div class="card-body">
-                        <h5 class="card-title">토마토 파스타 레시피</h5>
-                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                    </div>
-                </a></div>
-            <div class="card">
-                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-                    <img class="card-img-top"
-                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                    <div class="card-body">
-                        <h5 class="card-title">토마토 파스타 레시피</h5>
-                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                    </div>
-                </a></div>
-            <div class="card">
-                <a href="#" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
-
-                    <img class="card-img-top"
-                         src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
-                    <div class="card-body">
-                        <h5 class="card-title">토마토 파스타 레시피</h5>
-                        <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
-                    </div>
-                </a></div>
-        </div>
+<div class="cardS">
+  <div class="User">돼생 유저들의 레시피!지금 바로 볼까요?</div>
+  <div class="row row-cols-1 row-cols-md-3 g-4 ">
+    <div class="card-columns">
+      <div class="card" onclick="default()">
+        <a href="resp.html" class="n" data-toggle="modal" data-target=".bd-example-modal-lg">
+          <img class="card-img-top"
+               src="https://mblogthumb-phinf.pstatic.net/MjAyMDAzMjBfNTcg/MDAxNTg0Njk3OTU4NDY4.nZJDNMoolLVDsVDiHYNONfQdJ3k7c4tdTwL3p3MeqWog.NQYQx6FCkpNx_xEyhVyoob_SNP-fqLxajO4J8aaYe-Ug.JPEG.msinvestment/a-111.jpg?type=w800">
+          <div class="card-body">
+            <h5 class="card-title">토마토 파스타 레시피</h5>
+            <p class="card-text"> 토마토 파스타로 20분만에 휘리릭 외식 분위기내기! 아이들 입맛에도 딱이에요. </p>
+          </div>
+        </a>
+      </div>
     </div>
+  </div>
 </div>
-</div>
-<!-- card modal -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-     aria-hidden="true" id="#cardMod">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <h1 id="#rptitle">🥩레시피 타이틀🥩</h1>
-            <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "gkdtlr"이에요!> </span>
-            <!--  한식 양식 중식 일식 기타 선택 텍스트   -->
-            <img src="" class="photo"> <!-- 완성된 사진  -->
-            <div class="infocenter">
-                <div class="movline1">
-                    <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
-                    <div class="in">
-                        <!-- 래시피 재료             -->
-                        height는 알아서 늘었다 줄었다 합니당.
-                    </div>
-                </div>
-                <div class="movline2">
-                    <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
-                    <div class="ho">
-                        ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ
-                        <!--   레시피 설명          -->
-                    </div>
-                </div>
-            </div>
-            <h6 id="#time"><br>⏰ 시간 :</h6>
-            <h6 id="#money"><br>💰 비용 :</h6>
-            <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;"> <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
-            <h6 style="margin-top: 20px;" id="#strtag">📌 이런분께 추천해요!
-                <br><!--   해쉬태그 input값 띄워주세요!  --></h6>
 
-
-        </div>
-    </div>
-</div>
-</div>
 </body>
 
 </html>

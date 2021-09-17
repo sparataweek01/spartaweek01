@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>레시피 구현 창</title>
+  <style>
+    *{text-align: center}
+
+
+
+
+        .in {
+      border: solid 4px black;
+      width: 80%;
+      height: auto;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .ho {
+      border: solid 4px black;
+      width: 80%;
+      height: auto;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .infocenter {
+      margin: auto;
+      width: 100%;
+    }
+
+    .line1, .line2 {
+      margin-bottom: 4px;
+      font-size: 19px;
+    }
+
+    h6 {
+      font-size: 16px;
+    }
+
+    .movline1, .movline2 {
+      margin-top: 25px;
+    }
+
+    .level {
+      width: 200px;
+      margin: 20px auto 20px auto;
+    }
+
+
+    .photo {
+      display: block;
+      width: 400px;
+      height: 350px;
+      margin:20px auto;
+    }
+
+    .in, .ho, .photo{
+      border-radius: 15px;
+    }
+.anything{
+  width: 700px;
+  background-color: rgba(255, 255, 198, 0.7);
+  margin:40px auto;
+  border: solid 5px #ffe126;;
+  border-radius: 20px;
+
+
+}
+a {
+  text-decoration: none;
+}
+ button{
+  background-color: white;
+  border-width: 2px;
+  border-color: ;
+  border-radius: 12px;
+   width:100px;
+   height: 30px;
+   font-size: 17px;
+   margin-bottom: 20px;
+
+}
+  </style>
+</head>
+<body>
+<h1 style="font-size: 40px;color: black;margin-top: 50px;"><a href="project.html" >🐷당신의 돼지로운 레시피!두둥</a></h1>
+<div class="anything">
+      <h1 >🥩${title}🥩</h1>
+      <span style="font-size: 22px; margin: 5px auto 20px auto;"> < 이 요리는 "${category}"이에요!> </span>
+        <img src="${img}" class="photo">
+        <div class="infocenter">
+        <div class="movline1">
+          <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+        <div class="in">
+        ${ingredients}
+
+        </div>
+        </div>
+        <div class="movline2">
+        <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+        <div class="ho">
+        ${process}
+        </div>
+        </div>
+        </div>
+        <h6 ><br>⏰ 시간  :  ${time}</h6>
+        <h6 ><br>💰 비용  :  ${cost}</h6>
+        <h6 id="#level"><br>📌 레시피 난이도는 "<span style="color:red;">  ${level} <!--쉬워요,할만해요,어려워요--> </span>"네요!</h6>
+        <h6 style="margin-top: 20px;">📌 이런분께 추천해요!<br>${hstag}</h6>`
+  <button type="button" class="button">❤️좋아요</button>
+</div>
+</body>
+</html>
