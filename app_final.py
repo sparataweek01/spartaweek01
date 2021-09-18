@@ -98,7 +98,7 @@ def recipe_page():
         all_recipe_list_db = list(db.recipes.find({}, {'_id': False}))
         # 모든 레시피 리스트를 카드에 등록
 
-        return render_template('project.html', user_info=user_info, recipes=all_recipe_list_db )
+        return render_template('home.html', user_info=user_info, recipes=all_recipe_list_db )
     except jwt.ExpiredSignatureError:
         return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
     except jwt.exceptions.DecodeError:
@@ -203,6 +203,7 @@ def my_recipe_save():
 @app.route('/my_recipe_get', methods=['POST'])
 def recipe_detail():
     id_receive = int(request.form['id_give'])
+    print(id_receive)
     recipe = db.recipes_test.find_one({'id': id_receive}, {'_id': False})
     print(recipe)
     return jsonify({'result': 'success', 'msg': '상세레시피 조회완료', 'recipe': recipe})

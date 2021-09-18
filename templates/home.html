@@ -8,6 +8,12 @@
 
     <meta property="og:title" content="돼지런한 생활"/>
     <meta property="og:description" content="나만의 레시피를 공유해보세요!"/>
+    <!-- bootstrapcdn CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
     <meta property="og:image" content="{{ url_for('static', filename='og.png') }}"/>
 
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}"
@@ -25,9 +31,12 @@
 
 
     <!-- JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <!-- Bulma CSS -->
+    <title>Title</title>
 
 
     <style>
@@ -96,6 +105,170 @@
             window.location.href = "/"
         }
 
+        function openRecipeRegiModal() {
+            $("#modal-post").addClass('is-active');
+        }
+
+        function closeRecipeRegiModal() {
+            $("#modal-post").removeClass('is-active');
+        }
+
+        function closeSpecificModal(id) {
+            console.log(id)
+            $(`#${id}`).removeClass('is-active')
+        }
+
+        function postRecipe() {
+            closeRecipeRegiModal()
+            let title = $('#recipe_title').val();
+            let file = $('#recipe_File')[0].files[0]
+            let ingredients = $('#recipe_ingredients').val();
+            let process = $('#recipe_process').val();
+            let time = $('#recipe_time').val();
+            let cost = $('#recipe_cost').val();
+            let level = $('#exampleFormControlSelect2 option:selected').val();
+            let subtitle = $('#subtitle').val();
+            let category = $('#exampleFormControlSelect1 option:selected').val();
+
+
+            let form_data = new FormData()
+
+            form_data.append("file_give", file)
+            form_data.append("title_give", title)
+            form_data.append("ingredients_give", ingredients)
+            form_data.append("process_give", process)
+            form_data.append("time_give", time)
+            form_data.append("cost_give", cost)
+            form_data.append("category_give", category)
+            form_data.append("level_give", level)
+            form_data.append("subtitle_give", subtitle)
+
+            console.log(form_data)
+
+            $.ajax({
+                type: "POST",
+                url: "/my_recipe_save",
+                data: form_data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    let id = response.id
+                    console.log(id)
+                    let temp_html = `<div class="card" id=${id} onclick="getModalInfo(${id})" style="cursor: pointer;">
+                            <div class="n" data-toggle="modal" data-target=".bd-example-modal-lg" id="cardMod">
+                            <img class="card-img-top"
+                                 src="${file}">
+                            <div class="card-body">
+                                <h5 class="card-title">${title}</h5>
+                                <p class="card-text"> ${subtitle} </p>
+                            </div>
+                            </div>
+                            </div>
+                        </div>`
+                    $("#cards-wrapper").append(temp_html);
+                }
+            });
+        }
+
+        function getModalInfo(id) {
+            console.log(id)
+            $.ajax({
+                type: "POST",
+                url: "/my_recipe_get",
+                data: {
+                    id_give: id
+                },
+                success: function (response) {
+                    $('#modal-post').empty()
+                    let recipe = response['recipe']
+                    console.log(recipe.id)
+                    let temp_html = `<div class="modal" id=${recipe.id}>
+                                           <div class="modal-background" onclick="closeSpecificModal(${id})"></div>
+                                                        <div class="modal-content">
+                                              <h1 id="#rptitle">🥩${recipe.title}🥩</h1>
+                                              <span style="font-size: 22px; margin: 5px auto 20px auto;">
+                                                < 이 요리는 "${recipe.category}"이에요!> </span>
+                                                <img src="" class="photo">
+                                                <div class="infocenter">
+                                                <div class="movline1">
+                                                <p id="#ingred" class="line1">🥕레시피에 필요한 재료 </p>
+                                                <div class="in">
+                                                ${recipe.ingredients}
+                                                </div>
+                                                </div>
+                                                <div class="movline2">
+                                                <p id="#how" class="line2">👩🏻‍🍳이제부터 만들어봅시다!</p>
+                                                <div class="ho">
+                                                ${recipe.process}
+                                                </div>
+                                                </div>
+                                                </div>
+                                                <h6 id="#time"><br>⏰ 시간 : ${recipe.time}</h6>
+                                                <h6 id="#money"><br>💰 비용 : ${recipe.cost}</h6>
+                                                <h6 id="#level"><br>📌 레시피 난이도는 "
+                                                    <span style="color:red;">  ${recipe.level} </span>"네요!</h6>
+                                                <h6 style="margin-top: 20px;">📌 이런분께 추천해요!
+                                                </div>
+                                                </div>
+                                    </div>`
+
+                    $('#modal-scroll').append(temp_html)
+                    $(`#${recipe.id}`).addClass('is-active')
+                }
+            });
+        }
+
+        function getPosts() {
+            console.log('실행됨?')
+            $('#cards-wrapper').empty()
+            let keyword = $('#search-input').val()
+            console.log(keyword)
+
+            if (keyword == "") {
+                $('#help-keyword').removeClass('is-hidden')
+                console.log(keyword)
+                return
+            } else {
+                $('#help-keyword').addClass('is-hidden')
+                $('#help-search-result').removeClass('is-hidden')
+            }
+
+            $.ajax({
+                type: "POST",
+                url: `/home/posts`,
+                data: {
+                    keyword_give: keyword
+                },
+                success: function (response) {
+                    let posts = response.posts
+                    console.log(posts)
+                    for (i = 0; i < posts.length; i++) {
+                        let post = posts[i]
+                        let temp_html = `<div id="card-wrapper">
+                    <div id="card-component">
+                        <div class="card-1">
+                            <img
+                                    class="card-img-top"
+                                    src="${post['img-url']}"
+                                    alt="Card image cap"
+                            />
+                            <div class="card-body">
+                                <div target="_blank" href="#" class="card-title"
+                                >${post.title}</div
+                                >
+                                <p class="card-text">${post.subtitle} </>
+                                <p class="card-text comment">${post.subtitle}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+                        $('#cards-wrapper').append(temp_html)
+                    }
+                }
+            });
+        }
+
     </script>
 </head>
 <body>
@@ -111,11 +284,127 @@
         <p id="banner-title">돼지런한 생활</p>
     </div>
     <div id="search-box">
-        <input id="search-keyword" type="text">
+        <input id="search-input" type="text">
         <button id="search-btn" onclick="getPosts()">검색</button>
     </div>
     <p id="help-keyword" class="is-hidden">검색어를 입력해주세요</p>
-    <div id="cards-wrapper"></div>
+
+    <div class="inputRe">
+        <p>내가 만들었지만 너무 맛있는 레시피!</p>
+        <p> 지금 공유하러 갈까요?</p>
+        <button type="button" class="btn btn-primary rbtn" data-toggle="modal" data-target="#exampleModalLong"
+                aria-pressed="false" autocomplete="off" onclick="openRecipeRegiModal()">
+            레시피 공유하기
+        </button>
+    </div>
+
+
+    <div class="curation-title is-hidden" id="help-search-result">
+        <h1 class="curation-recipe-title">레시피를 살펴보세요</h1>
+    </div>
+
+
+    <!--  레시피 등록모달  -->
+    <div id="modal-scroll">
+
+    </div>
+    <div class="modal" id="modal-post">
+        <div class="modal-background" onclick='$("#modal-post").removeClass("is-active")'></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">레시피를 공유해주세요!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                        onclick="closeRecipeRegiModal()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipe_title">어떤음식을 만드셨나요?</label>
+                        <input type="email" class="form-control" id="recipe_title"
+                               placeholder="레시피명을 적어주세요.">
+                    </div>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="recipe_File">
+                        <label class="custom-file-label" for="recipe_File">완성된 음식 사진을 선택해주세요.</label>
+                    </div>
+                    <div class="explain">
+                        <div class="form-group">
+                            <label for="recipe_ingredients">레시피에 들어가는 재료는 뭔가요?</label>
+                            <textarea class="form-control" id="recipe_ingredients" rows="3"
+                                      placeholder="레시피 재료와 양을 적어주세요."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="recipe_process">레시피를 자세히 적어볼까요?</label>
+                            <textarea class="form-control respTurn" id="recipe_process" rows="3"
+                                      placeholder="레시피 순서를 자세히 적어주세요."></textarea>
+                        </div>
+                    </div>
+                    <form>
+                        <div class="form-row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="요리시간은 얼마나 걸렸나요?"
+                                       id="recipe_time">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="재료비용은 얼마나 들었나요?"
+                                       id="recipe_cost">
+                            </div>
+                        </div>
+                        <div class="level">
+                            <label for="exampleFormControlSelect2">레시피의 난이도는 어떤가요?</label>
+                            <select class="form-control" id="exampleFormControlSelect2">
+                                <option>쉬워요</option>
+                                <option>할만해요</option>
+                                <option>어려워요</option>
+                            </select>
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <label for="subtitle">레시피 총평을 적어주세요.</label>
+                        <textarea class="form-control" id="subtitle" rows="3"></textarea>
+                    </div>
+                    <div class="category">
+                        <label for="exampleFormControlSelect1">음식의 카테고리를 선택해주세요!</label>
+                        <select class="form-control" id="exampleFormControlSelect1">
+                            <option>한식</option>
+                            <option>중식</option>
+                            <option>양식</option>
+                            <option>일식</option>
+                            <option>기타</option>
+                        </select>
+                    </div>
+                </form>
+                <div class="tr_hashTag_area">
+                    <p style="margin:20px auto 6px auto; ">어떤 분위기에 어울리나요?</p>
+                    <div class="form-group">
+                        <input type="hidden" value="" name="tag" id="rdTag"/>
+                    </div>
+
+                    <ul id="tag-list"></ul>
+
+                    <div class="form-group">
+                        <input type="text" id="tag" size="7" placeholder="#집밥 #piggylife #yolo">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closeRecipeRegiModal()">
+                    취소
+                </button>
+                <button type="button" class="btn btn-primary" onclick="postRecipe(); " name="shareBt">레시피 공유!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <section id="curation-box">
+        <div id="cards-wrapper">
+        </div>
+    </section>
+
+
 </div>
 </body>
 </html>
