@@ -36,7 +36,7 @@
 <nav id="utility">
     <div id="nav-left" onclick="window.location.href='/'" style="cursor: pointer">🐷돼생</div>
     <div id="nav-right">
-        <button id="sing-out-btn" onclick="sign_out()">로그아웃</button>
+        <button id="sing-out-btn" onclick="sign_out()" style="cursor: pointer">로그아웃</button>
     </div>
 </nav>
 <div id="main-cover">
@@ -100,8 +100,8 @@
                                 <a target="_blank" href="{{ recipe.url }}" class="card-title"
                                 >{{ recipe.title }}</a
                                 >
-                                <p class="card-text">{{ recipe.user }} <span>{{ recipe.view }}</span></p>
-                                <p class="card-text comment">리뷰수 <b>{{ recipe.review }}</b></p>
+{#                                <p class="card-text">{{ recipe.user }} <span>{{ recipe.view }}</span></p>#}
+                                <p class="card-text comment" style="margin-top: 30px">조회수 <b>{{ recipe.view }}</b></p>
                             </div>
                         </div>
                     </div>

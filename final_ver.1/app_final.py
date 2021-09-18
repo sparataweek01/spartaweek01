@@ -2,6 +2,7 @@ from pymongo import MongoClient
 import jwt
 import datetime
 import hashlib
+import random
 from flask import Flask, render_template, jsonify, request, redirect, url_for
 from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
@@ -25,8 +26,22 @@ def home():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
         matjips = list(db.matjips.find({}, {"_id": False}).limit(10))
+        # 난수로 추천해보려 했지만 실패
+
+        # matjips_db_len = db.matjips.count_documents({})
+        # print(matjips_db_len)
+        # random_List = []
+        # random_num = random.randrange(0, (matjips_db_len) - 1)
+        # for i in range(matjips_db_len - 1):
+        #     while random_num in random_List:  # 중복될 경우
+        #         random_num = random.randrange(0, (matjips_db_len) - 1)  # 다시 난수 생성
+        #     random_List.append(random_num)  # 중복 되지 않은 경우만 추가
+        # print(random_List)
+        # db.matjips.update({})
+
         # recipes = list(db.recipes.find({}, {"_id": False}))
-        top_ten_recipes = list(db.recipes.find({}).sort("review", -1).limit(10))
+        top_ten_recipes = list(db.recipes.find({}).sort("view", -1).limit(10))
+        # 조회수 탑 10
 
         return render_template('index.html', user_info=user_info, msg="로그인 완료", matjips=matjips, recipes=top_ten_recipes)
     except jwt.ExpiredSignatureError:
